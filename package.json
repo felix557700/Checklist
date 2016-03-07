@@ -1,0 +1,41 @@
+{
+  "name": "checklist",
+  "version": "0.0.1",
+  "repository": "https://github.com/felix557700/checklist.git",
+  "description": "mainly travel checklist",
+  "keywords": "nodejs expressjs aurelia.js babel gulp checklist",
+  "main": "./app/server.js",
+  "scripts": {
+    "start": "node ./app/server.js",
+    "dev": "./node_modules/.bin/gulp start",
+    "build": "./node_modules/.bin/gulp babel",
+    "babel": "babel src -d app",
+    "babel-watch": "babel src -d app --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^1.5.2",
+    "compression": "^1.6.1",
+    "express": "^4.13.4",
+    "morgan": "^1.2.2",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-nodemon": "^2.0.6",
+    "gulp-relative-sourcemaps-source": "^0.1.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "babel-cli": "^6.5.1",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-es2015-node5": "^1.1.2",
+    "nodemon": "^1.8.1",
+    "rimraf": "^2.5.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "node-inspector": "^0.12.6",
+    "should": "^8.2.2",
+    "supertest": "^1.2.0"
+  },
+  "author": "Filip Vitas",
+  "license": "ISC"
+}
