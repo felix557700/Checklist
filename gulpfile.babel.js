@@ -32,7 +32,7 @@ gulp.task('babel', () => {
 		.pipe(gulp.dest(paths.destination));
 });
 
-gulp.task('start', () => {
+gulp.task('dev', ['babel'], () => {
 	nodemon({
 		verbose: true,
 		ignore: ['.git', '.idea', 'node_modules/**/node_modules', 'test', './app'],
@@ -41,6 +41,6 @@ gulp.task('start', () => {
 		nodeArgs: ['--debug'],
 		ext: 'js json',
 		env: {'NODE_ENV': 'development'}
-		}).on('restart', ['babel']);
+	}).on('restart', ['babel']);
 });
 
