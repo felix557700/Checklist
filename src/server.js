@@ -1,8 +1,9 @@
-import listen from './server.listen';
+import startServer from './server.listen';
 import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 import compression from 'compression';
+import {api} from './routes/api';
 
 const app = express();
 
@@ -12,10 +13,12 @@ app.use(bodyParser.json());
 app.use(compression());
 app.use(logger('dev'));
 
-app.get('/', (req, res)=> {
+app.use('/api', api);
+
+app.get('/', (req, res) => {
 	res.status(200).json({hello: 'hello world'});
 });
 
-listen(app);
+startServer(app);
 
 exports = module.exports = app;
