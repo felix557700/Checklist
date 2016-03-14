@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import logger from 'morgan';
 import compression from 'compression';
 import {api} from './routes/api';
+import MongoDb from './db'
 
 const app = express();
 
@@ -19,6 +20,8 @@ app.get('/', (req, res) => {
 	res.status(200).json({hello: 'hello world'});
 });
 
-startServer(app);
+new MongoDb().connectToMongo()
+	.then(() => startServer(app))
+	.catch(() => process.exit(1));
 
 exports = module.exports = app;
