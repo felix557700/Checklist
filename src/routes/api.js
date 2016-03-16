@@ -1,28 +1,35 @@
 import express from 'express';
-import UserService from './../service/user'
+import {Router} from 'express';
+import ChecklistService from './../service/user'
 
-let api = express();
-let userService = new UserService();
+let router = new Router;
+let checklistService = new ChecklistService();
 
-api.route('/')
-	.get((req, res) => {
-		userService.findAll()
-			.then(value => {
-				res.status(200).json(value);
-			})
-	})
-	.post((req, res) => {
-		console.log(req.body);
-		res.status(200).json({hello: 'post api'});
-	});
+router.get('/', (request, response) => {
+	checklistService
+		.findAll()
+		.then(value => {
+			response.status(200).json(value);
+		})
+});
 
-api.route('/checklist')
-	.get((req, res) => {
-		res.status(200).json({hello: 'get api'});
-	})
-	.post((req, res) => {
-		console.log(req.body);
-		res.status(200).json({hello: 'post api'});
-	});
+router.post('/checklist', (request, response) => {
+	console.log(request.body, request.body.name)
+	let name = request.body.name;
 
-export {api};
+	checklistService
+		.createNewChecklist(name)
+		.then(() => response.status(200).end())
+		.catch(() => response.status(401).end());
+});
+
+router.get('/checklist/:id', (request, response) => {
+	let id = request.params.id;
+
+	checklistService
+		.getChecklist(id)
+		.then(checklist => response.status(200).json(checklist))
+		.catch(error => response.status(401).end());
+});
+
+export {router};

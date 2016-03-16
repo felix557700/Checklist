@@ -3,7 +3,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 import compression from 'compression';
-import {api} from './routes/api';
+import {router} from './routes/api';
 import MongoDb from './db'
 
 const app = express();
@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(compression());
 app.use(logger('dev'));
 
-app.use('/api', api);
+app.use('/api', router);
 
 app.get('/', (req, res) => {
 	res.status(200).json({hello: 'hello world'});
