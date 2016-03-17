@@ -1,6 +1,7 @@
 import express from 'express';
 import {Router} from 'express';
-import ChecklistService from './../service/user'
+import {OK, UNAUTHORIZED} from 'es6-http-status-codes';
+import ChecklistService from './../service/user';
 
 let router = new Router;
 let checklistService = new ChecklistService();
@@ -9,18 +10,17 @@ router.get('/', (request, response) => {
 	checklistService
 		.findAll()
 		.then(value => {
-			response.status(200).json(value);
+			response.status(OK).json(value);
 		})
 });
 
 router.post('/checklist', (request, response) => {
-	console.log(request.body, request.body.name)
 	let name = request.body.name;
 
 	checklistService
 		.createNewChecklist(name)
-		.then(() => response.status(200).end())
-		.catch(() => response.status(401).end());
+		.then(() => response.status(OK).end())
+		.catch(() => response.status(UNAUTHORIZED).end());
 });
 
 router.get('/checklist/:id', (request, response) => {
@@ -28,8 +28,8 @@ router.get('/checklist/:id', (request, response) => {
 
 	checklistService
 		.getChecklist(id)
-		.then(checklist => response.status(200).json(checklist))
-		.catch(error => response.status(401).end());
+		.then(checklist => response.status(OK).json(checklist))
+		.catch(error => response.status(UNAUTHORIZED).end());
 });
 
 export {router};
