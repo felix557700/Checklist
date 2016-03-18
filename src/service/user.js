@@ -36,14 +36,9 @@ export default class ChecklistService {
 			let safe = {w: 1, j: 1};
 
 			collection
-				.insertOne(newChecklist, safe,function (err, documents) {
-					if (err) {
-						reject(err);
-					} else {
-						resolve(documents);
-					}});
-				//.then(() => resolve())
-				//.catch(() => reject());
+				.insertOne(newChecklist, safe)
+				.then(documents => resolve(documents))
+				.catch(error => reject(error));
 		});
 	}
 
@@ -53,8 +48,21 @@ export default class ChecklistService {
 
 			collection
 				.find({checklistId: id})
+				.limit(1)
 				.toArray()
 				.then(array => resolve(array[0]))
+				.catch(error => reject(error));
+		});
+	}
+
+	deleteChecklist(id) {
+		return new Promise(function (resolve, reject) {
+			let collection = MongoDb.getDb().collection('test');
+			let safe = {w: 1, j: 1};
+
+			collection
+				.deleteOne({checklistId: id}, safe)
+				.then(() => resolve())
 				.catch(err => reject(err));
 		});
 	}
