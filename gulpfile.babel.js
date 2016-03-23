@@ -36,7 +36,7 @@ gulp.task('dev', ['babel'], () => {
 	nodemon({
 		verbose: true,
 		ignore: ['.git', '.idea', 'node_modules/**/node_modules', 'test', './app'],
-		watch: ['./src'],
+		watch: ['./src', './public'],
 		script: './app/server.js',
 		nodeArgs: ['--debug'],
 		ext: 'js json',

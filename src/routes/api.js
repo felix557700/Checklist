@@ -1,4 +1,4 @@
-import {express} from 'express';
+import express from 'express';
 import {Router} from 'express';
 import {OK, NO_CONTENT, BAD_REQUEST} from './es6-http-status-codes';
 import ChecklistService from './../service/checklistService';

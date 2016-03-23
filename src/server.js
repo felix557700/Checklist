@@ -13,12 +13,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(compression());
 app.use(logger('dev'));
+app.disable("X-Powered-By");
 
 app.use('/api', router);
-
-app.get('/', (req, res) => {
-	res.status(200).json({hello: 'hello world'});
-});
 
 new MongoDb().connectToMongo()
 	.then(() => startServer(app))
