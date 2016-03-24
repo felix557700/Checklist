@@ -6,14 +6,18 @@
   "keywords": "nodejs expressjs aurelia.js babel gulp checklist",
   "main": "./app/server.js",
   "scripts": {
-    "start": "node ./app/server.js",
-    "dev": "./node_modules/.bin/gulp dev",
-    "build": "./node_modules/.bin/gulp babel",
+    "node": "node ./app/server.js",
     "babel": "babel src -d app",
     "babel-watch": "babel src -d app --watch",
+    "bundle": "webpack --progress --colors --display-modules --display-error-details --config webpack.config.js",
+    "bundle-watch": "webpack --watch --progress --colors --display-modules --display-error-details --config webpack.config.js",
+    "bundle-production": "webpack -p --config webpack.prod.config.js",
+    "start": "npm bundle & npm node",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "angular": "^1.5.2",
+    "angular-ui-router": "^0.2.18",
     "babel-cli": "^6.5.1",
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-es2015-node5": "^1.1.2",
@@ -30,9 +34,12 @@
     "morgan": "^1.2.2",
     "node-uuid": "^1.4.7",
     "nodemon": "^1.8.1",
-    "rimraf": "^2.5.2"
+    "rimraf": "^2.5.2",
+    "webpack": "^1.12.14"
   },
   "devDependencies": {
+    "babel-core": "^6.7.4",
+    "babel-loader": "^6.2.4",
     "chai": "^3.5.0",
     "mocha": "^2.4.5",
     "node-inspector": "^0.12.6",

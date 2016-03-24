@@ -8,12 +8,12 @@ import MongoDb from './db'
 
 const app = express();
 
-app.use(express.static(__dirname + '../public'));
+app.use(express.static(__dirname + '/../frontend-public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(compression());
 app.use(logger('dev'));
-app.disable("X-Powered-By");
+app.disable("x-powered-by");
 
 app.use('/api', router);
 
