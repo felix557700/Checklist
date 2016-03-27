@@ -1,5 +1,5 @@
 export default class AuthenticationService {
-	constructor() {
+	constructor($http) {
 		this.http = $http;
 	}
 
