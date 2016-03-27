@@ -3,7 +3,7 @@ npm-debug.log
 app/
 bin/
 public/
-
+frontend-public/
 *.iml
 .idea/
 *.ipr

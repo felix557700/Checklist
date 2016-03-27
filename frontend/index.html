@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="theme-color" content="#4689c6">
 		<meta name="Keywords" content="Node,MongoDB,ES6,JavaScript,HTML,CSS,fullstack">
+		<meta name="fragment" content="!" />
 		<base href="/">
 		<!--TODO: add icons-->
 		<!--<link rel="mask-icon" href="/favicon.svg" color="#171717">-->
@@ -13,10 +14,12 @@
 
 	<body ng-app="myApp" ng-strict-di>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
 		<script src="bundle.js" type="application/javascript"></script>
 
-		<div ng-controller="AppDemoController">
-			I can add: {{a}} + {{b}} =  {{ a+b }}
-		</div>
+		<a href="/">Home</a>
+		<a href="/checklist">Checklist</a>
+
+		<div ui-view></div>
 	</body>
 </html>

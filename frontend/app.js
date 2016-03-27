@@ -1,11 +1,12 @@
 import angular from 'angular'
 import uiRouter from 'angular-ui-router'
-import AppDemoController from 'AppDemoController'
+import routes from './config'
 
-angular
-	.module('myApp', [])
-	.controller('AppDemoController', AppDemoController);
+const app = angular
+	.module('myApp', [
+		uiRouter
+	]);
 
-//angular.element(document).ready(function() {
-//	angular.bootstrap(document, ['myApp']);
-//});
+app.config(routes);
+
+export default app;

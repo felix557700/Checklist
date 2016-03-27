@@ -24,7 +24,8 @@ module.exports = {
 		]
 	},
 	debug: true,
-	externals: {
-		'angular': 'angular'
-	}
+	externals: [{
+		'angular': 'angular',
+		'angular-ui-router': '"ui.router"'
+	}]
 };
