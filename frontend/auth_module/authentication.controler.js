@@ -1,15 +1,14 @@
 class AuthenticationController {
-	constructor($scope){
-		$scope.loginMessage = 'hi login';
+	constructor($scope, AuthenticationService) {
+		$scope.loginMessage = 'hi ctrl';
+		this.AuthenticationService = AuthenticationService;
 	}
 
-	login(){}
-
-	logout(){}
-
-	register(){}
+	login() {
+		console.log(this.AuthenticationService.sendCredentials());
+	}
 }
 
-AuthenticationController.$inject = ['$scope'];
+AuthenticationController.$inject = ['$scope', 'AuthenticationService'];
 
 export default AuthenticationController;

@@ -5,13 +5,15 @@ let routes = ($stateProvider, $urlRouterProvider, $locationProvider) => {
 	$stateProvider
 		.state('authentication', {
 			url: "/",
-			controller: AuthenticationController,
-			templateUrl: './auth_module/authentication.html'
+			templateUrl: './auth_module/authentication.html',
+			controller: "AuthenticationController",
+			authenticate: false
 		})
 		.state('checklist', {
 			url: "/checklist",
+			templateUrl: './checklist_module/checklist.html',
 			controller: ChecklistController,
-			templateUrl: './checklist_module/checklist.html'
+			authenticate: false
 		});
 
 	$urlRouterProvider.otherwise('/');
