@@ -4,7 +4,7 @@ import {OK, NO_CONTENT, BAD_REQUEST} from './es6-http-status-codes';
 import ChecklistService from './../service/checklistService';
 import ItemService from './../service/itemService';
 
-let router = new Router;
+let router = new Router();
 let checklistService = new ChecklistService();
 let itemService = new ItemService();
 
