@@ -48,16 +48,16 @@ gulp.task('dev', ['babel'], () => {
 });
 
 
-gulp.task('clean', function() {
+gulp.task('clean', function () {
 	return del('./frontend-public');
 });
 
-gulp.task('copy:html', function() {
+gulp.task('copy:html', function () {
 	gulp.src('./frontend/**/*.html')
 		.pipe(gulp.dest('./frontend-public'));
 });
 
-gulp.task('copy:css', function() {
+gulp.task('copy:css', function () {
 	gulp.src('./frontend/**/*.styl')
 		.pipe(stylus())
 		.pipe(gulp.dest('./frontend-public'));
@@ -66,6 +66,10 @@ gulp.task('copy:css', function() {
 
 gulp.task('run webpack', shell.task(['npm run bundle']));
 
-gulp.task('build:frontend', function() {
+gulp.task('build:frontend', function () {
 	runsequence('clean', ['copy:html', 'copy:css', 'run webpack']);
+});
+
+gulp.task('watch:frontend', function () {
+	gulp.watch('./frontend/**/*', ['build:frontend']);
 });
