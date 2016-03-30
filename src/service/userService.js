@@ -1,5 +1,7 @@
 import MongoDb from './../db'
 
+let writeSafe = {w: 1, j: true};
+
 export default class UserService {
 	constructor() {
 	}
@@ -21,9 +23,8 @@ export default class UserService {
 		return new Promise(function (resolve, reject) {
 			let collection = MongoDb.getDb().collection('users');
 
-			//TODO: find if already exist in db
 			collection
-				.insertOne({name: name, password: hashPassword})
+				.insertOne({name: name, password: hashPassword}, writeSafe)
 				.then(value => resolve(value))
 				.catch(error => reject(error));
 		});
