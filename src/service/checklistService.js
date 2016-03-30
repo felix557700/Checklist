@@ -13,7 +13,7 @@ export default class ChecklistService {
 			collection
 				.find({}, {_id: 0})
 				.toArray()
-				.then(documents => resolve(documents))
+				.then(() => resolve())
 				.catch(error => reject(error));
 		});
 	}
