@@ -67,8 +67,8 @@ user.post('/register', (request, response) => {
 
 	userService
 		.addUser(name, hashPassword)
-		.then(result => {
-			response.status(OK).json({name: result.name});
+		.then(() => {
+			response.status(OK).json({name: name});
 		})
 		.catch(() => {
 			response.status(CONFLICT).json();

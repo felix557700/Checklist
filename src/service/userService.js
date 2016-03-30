@@ -21,9 +21,10 @@ export default class UserService {
 		return new Promise(function (resolve, reject) {
 			let collection = MongoDb.getDb().collection('users');
 
+			//TODO: find if already exist in db
 			collection
 				.insertOne({name: name, password: hashPassword})
-				.then(() => resolve())
+				.then(value => resolve(value))
 				.catch(error => reject(error));
 		});
 	}

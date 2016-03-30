@@ -1,8 +1,6 @@
 import startServer from './server.listen';
 import express from 'express';
 import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
-import session from 'cookie-session';
 import logger from 'morgan';
 import compression from 'compression';
 import expressJwt from 'express-jwt';
@@ -20,7 +18,7 @@ app.use(bodyParser.json());
 app.use(compression());
 app.disable("x-powered-by");
 
-app.use(expressJwt({secret: secret}).unless({path: ['/api/users/login', '/api/users/register']}));
+app.use(expressJwt({secret: secret}).unless({path: ['/api/users/login', '/api/users/register', '*.html', '*.js', '*.css']}));
 
 app.use(function (error, request, response, next) {
 	if (error.name === 'UnauthorizedError') {
