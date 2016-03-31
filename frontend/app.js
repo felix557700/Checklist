@@ -1,15 +1,21 @@
 import angular from 'angular'
 import uiRouter from 'angular-ui-router'
+import {} from 'user_module/user'
 import routes from './config'
-import AuthenticationController from './auth_module/authentication.controler'
-import AuthenticationService from './auth_module/authentication.service'
 
 const app = angular
 	.module('myApp', [
-		uiRouter
+		uiRouter, 'user'
 	])
 	.config(routes)
-	.controller("AuthenticationController", AuthenticationController)
-	.service("AuthenticationService", AuthenticationService);
+	.run(['$rootScope', '$state', function ($rootScope, $state) {
+		$rootScope.$on("$stateChangeStart", function (event, toState, fromState, fromParams, options) {
+			//if (toState.authenticate && !AuthService.isAuthenticated()) {
+			// User is not authenticated
+			//$state.transitionTo("login");
+			//event.preventDefault();
+			//}
+		});
+	}]);
 
 export default app;

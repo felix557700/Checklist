@@ -1,19 +1,16 @@
-import AuthenticationController from 'auth_module/authentication.controler'
-import ChecklistController from 'checklist_module/checklist.controller'
-
 let routes = ($stateProvider, $urlRouterProvider, $locationProvider) => {
 	$stateProvider
 		.state('authentication', {
 			url: "/",
-			templateUrl: './auth_module/authentication.html',
-			controller: "AuthenticationController",
+			templateUrl: './user_module/user-auth.html',
+			controller: 'UserController',
 			authenticate: false
 		})
 		.state('checklist', {
 			url: "/checklist",
 			templateUrl: './checklist_module/checklist.html',
-			controller: ChecklistController,
-			authenticate: false
+			controller: 'ChecklistController',
+			authenticate: true
 		});
 
 	$urlRouterProvider.otherwise('/');
