@@ -4,7 +4,7 @@ module.exports = {
 	entry: ['./frontend/app.js'],
 	devtool: "#inline-sourcemap",
 	output: {
-		path: __dirname + '/frontend-public/',
+		path: __dirname + '/frontend_public/',
 		filename: 'bundle.js'
 	},
 	resolve: {

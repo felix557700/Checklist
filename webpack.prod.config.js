@@ -3,7 +3,7 @@ var webpack = require('webpack');
 module.exports = {
 	entry: ['./frontend/app.js'],
 	output: {
-		path: __dirname + '/frontend-public/',
+		path: __dirname + '/frontend_public/',
 		filename: 'bundle.js'
 	},
 	resolve: {

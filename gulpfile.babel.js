@@ -49,25 +49,30 @@ gulp.task('dev', ['babel'], () => {
 
 
 gulp.task('clean', function () {
-	return del('./frontend-public');
+	return del('./frontend_public');
 });
 
 gulp.task('copy:html', function () {
 	gulp.src('./frontend/**/*.html')
-		.pipe(gulp.dest('./frontend-public'));
+		.pipe(gulp.dest('./frontend_public'));
 });
 
 gulp.task('copy:css', function () {
 	gulp.src('./frontend/**/*.styl')
 		.pipe(stylus())
-		.pipe(gulp.dest('./frontend-public'));
+		.pipe(gulp.dest('./frontend_public'));
 
+});
+
+gulp.task('copy:icon', function () {
+	gulp.src(['./frontend/*.ico'])
+		.pipe(gulp.dest('./frontend_public'));
 });
 
 gulp.task('run webpack', shell.task(['npm run bundle']));
 
 gulp.task('build:frontend', function () {
-	runsequence('clean', ['copy:html', 'copy:css', 'run webpack']);
+	runsequence('clean', ['copy:html', 'copy:css', 'run webpack', 'copy:icon']);
 });
 
 gulp.task('watch:frontend', function () {
