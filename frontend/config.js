@@ -2,7 +2,7 @@ let routes = ($stateProvider, $urlRouterProvider, $locationProvider) => {
 	$stateProvider
 		.state('authentication', {
 			url: "/",
-			templateUrl: './user_module/user-auth.html',
+			templateUrl: './user_module/user.html',
 			controller: 'UserController',
 			authenticate: false
 		})
@@ -15,7 +15,7 @@ let routes = ($stateProvider, $urlRouterProvider, $locationProvider) => {
 
 	$urlRouterProvider.otherwise('/');
 
-	$locationProvider.html5Mode(true);
+	$locationProvider.html5Mode(false);
 };
 
 routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];

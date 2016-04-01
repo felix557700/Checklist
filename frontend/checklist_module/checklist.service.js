@@ -4,11 +4,11 @@ class ChecklistService {
 	}
 
 	getChecklists(name, password) {
-		//return this.http.put('./api/users/login', {name, password});
+		return this.http.get('./api/checklists');
 	}
 
 	addChecklist(name, password) {
-		//return this.http.post('./api/users/register', {name, password});
+		return this.http.post('./api/checklists', {name, password});
 	}
 
 	deleteChecklist(){}
