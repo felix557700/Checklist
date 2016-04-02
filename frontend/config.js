@@ -1,4 +1,4 @@
-let routes = ($stateProvider, $urlRouterProvider, $locationProvider) => {
+let routes = ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) => {
 	$stateProvider
 		.state('authentication', {
 			url: "/",
@@ -16,8 +16,10 @@ let routes = ($stateProvider, $urlRouterProvider, $locationProvider) => {
 	$urlRouterProvider.otherwise('/');
 
 	$locationProvider.html5Mode(false);
+
+	$httpProvider.interceptors.push('AuthInterceptor')
 };
 
-routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
+routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
 
 export default routes;

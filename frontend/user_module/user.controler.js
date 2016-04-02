@@ -14,7 +14,6 @@ class UserController {
 			})
 			.catch(error => {
 				// TODO filip(01/04/2016): display error
-				localStorage.removeItem('token');
 			});
 	}
 

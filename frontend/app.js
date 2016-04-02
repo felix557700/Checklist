@@ -10,15 +10,14 @@ const app = angular
 		uiRouter, 'user', 'checklist'
 	])
 	.config(routes)
-	.config(['$httpProvider', $httpProvider => $httpProvider.interceptors.push('AuthInterceptor')])
-	.service('AuthInterceptor', AuthInterceptor)
+	.factory('AuthInterceptor', AuthInterceptor)
 	.run(['$rootScope', '$state', function ($rootScope, $state) {
 		$rootScope.$on("$stateChangeStart", function (event, toState, fromState, fromParams, options) {
-			//if (toState.authenticate && !AuthService.isAuthenticated()) {
-			// User is not authenticated
-			//$state.transitionTo("login");
-			//event.preventDefault();
-			//}
+			if (!localStorage.getItem('token')) {
+				// TODO filip(02/04/2016): continue here
+				//event.preventDefault();
+				//$state.go("authentication");
+			}
 		});
 	}]);
 

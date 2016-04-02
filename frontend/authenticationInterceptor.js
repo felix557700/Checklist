@@ -1,25 +1,25 @@
-let AuthInterceptor = ($rootScope, $q, $window) => {
+let AuthInterceptor = ($window, $q, $injector) => {
 	return {
-		request: function (config) {
-			config.headers = config.headers || {};
+		request: function (request) {
+			request.headers = request.headers || {};
 			if ($window.localStorage.token) {
-				config.headers.Authorization = 'Bearer ' + $window.localStorage.token;
+				request.headers.Authorization = 'Bearer ' + $window.localStorage.token;
 			}
-			console.log($window.localStorage.token);
-			console.log(localStorage.token);
-			return config;
+			return request;
 		},
-		response: function (response) {
-			let token = response.config.headers.authorization;
-			if (response.status === 401 && !token) {
-				// go to state login
-				$state.go('login');
+		responseError: function (rejection) {
+			let token = rejection.config.headers.authorization;
+			if (rejection.status === 401 && !token) {
+				localStorage.removeItem('token');
+
+				let stateService = $injector.get('$state');
+				stateService.go('authentication');
 			}
-			return response || $q.when(response);
+			return rejection || $q.when(rejection);
 		}
 	}
 };
 
-AuthInterceptor.$inject = ['$rootScope', '$q', '$window'];
+AuthInterceptor.$inject = ['$window', '$q', '$injector'];
 
 export default AuthInterceptor;
