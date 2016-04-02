@@ -15,7 +15,7 @@ let AuthInterceptor = ($window, $q, $injector) => {
 				let stateService = $injector.get('$state');
 				stateService.go('authentication');
 			}
-			return rejection || $q.when(rejection);
+			return new Promise((resolve, reject) => reject(rejection));
 		}
 	}
 };
