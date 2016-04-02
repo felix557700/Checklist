@@ -14,6 +14,7 @@ class UserController {
 			})
 			.catch(error => {
 				// TODO filip(01/04/2016): display error
+				console.log('login failed');
 			});
 	}
 
@@ -21,7 +22,8 @@ class UserController {
 		return this.UserService
 			.registerUser(this.user.name, this.user.password)
 			.then(result => {
-				// TODO filip(01/04/2016): save user locally
+				this.user.name = result.data.name;
+				this.user.password = '';
 				console.log('register succeed');
 			})
 			.catch(error => {
