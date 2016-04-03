@@ -1,6 +1,6 @@
 import express from 'express';
 import {Router} from 'express';
-import {OK, NO_CONTENT, BAD_REQUEST} from './es6-http-status-codes';
+import {OK, CREATED, NO_CONTENT, BAD_REQUEST} from './es6-http-status-codes';
 import ChecklistService from './../service/checklistService';
 import ItemService from './../service/itemService';
 
@@ -8,86 +8,96 @@ let router = new Router();
 let checklistService = new ChecklistService();
 let itemService = new ItemService();
 
-router.get('/checklists', (request, response) => {
+
+//-------------------- API for checklists --------------------//
+
+router.get('/:username/checklists', (request, response) => {
+	let username = request.params.username;
+
 	checklistService
-		.findAll()
-		.then(value => response.status(OK).json(value))
+		.getAllChecklists(username)
+		.then(checklists => response.status(OK).json(checklists))
+		.catch(error => response.sendStatus(BAD_REQUEST))
 });
 
-router.post('/checklists', (request, response) => {
+router.post('/:username/checklists', (request, response) => {
+	let username = request.params.username;
 	let checklist = request.body;
 
 	checklistService
-		.createNewChecklist(checklist)
-		.then(() => response.status(OK).end())
-		.catch(() => response.status(BAD_REQUEST).end());
+		.createNewChecklist(username, checklist)
+		.then(() => response.sendStatus(CREATED))
+		.catch(error => response.sendStatus(BAD_REQUEST));
 });
 
-router.get('/checklists/:id', (request, response) => {
+router.get('/:username/checklists/:id', (request, response) => {
 	let id = request.params.id;
 
 	checklistService
 		.getChecklist(id)
 		.then(checklist => response.status(OK).json(checklist))
-		.catch(error => response.status(BAD_REQUEST).end());
+		.catch(error => response.sendStatus(BAD_REQUEST));
 });
 
-router.delete('/checklists/:id', (request, response) => {
+router.delete('/:username/checklists/:id', (request, response) => {
 	let id = request.params.id;
 
 	checklistService
 		.deleteChecklist(id)
 		.then(() => response.status(NO_CONTENT).json())
-		.catch(error => response.status(BAD_REQUEST).end());
+		.catch(error => response.sendStatus(BAD_REQUEST));
 });
 
-router.get('/checklists/:checklistId/items', (request, response) => {
+
+//-------------------- API for items of checklist --------------------//
+
+router.get('/:username/checklists/:checklistId/items', (request, response) => {
 	let checklistId = request.params.checklistId;
 
 	itemService
 		.getItemsOfChecklist(checklistId)
 		.then(items => response.status(OK).json(items))
-		.catch(error => response.status(BAD_REQUEST).end());
+		.catch(error => response.sendStatus(BAD_REQUEST));
 });
 
-router.post('/checklists/:checklistId/items', (request, response) => {
+router.post('/:username/checklists/:checklistId/items', (request, response) => {
 	let checklistId = request.params.checklistId;
 	let item = request.body;
 
 	itemService
 		.createNewItem(checklistId, item)
-		.then(() => response.status(OK).end())
-		.catch(error => response.status(BAD_REQUEST).end());
+		.then(() => response.sendStatus(CREATED))
+		.catch(error => response.sendStatus(BAD_REQUEST));
 });
 
-router.delete('/checklists/:checklistId/items/:itemId', (request, response) => {
+router.delete('/:username/checklists/:checklistId/items/:itemId', (request, response) => {
 	let checklistId = request.params.checklistId;
 	let itemId = request.params.itemId;
 
 	itemService
 		.deleteItemFromChecklist(checklistId, itemId)
-		.then(() => response.status(NO_CONTENT).end())
-		.catch(error => response.status(BAD_REQUEST).end());
+		.then(() => response.sendStatus(NO_CONTENT))
+		.catch(error => response.sendStatus(BAD_REQUEST));
 });
 
-router.put('/checklists/:checklistId/items/:itemId/check', (request, response) => {
+router.put('/:username/checklists/:checklistId/items/:itemId/check', (request, response) => {
 	let checklistId = request.params.checklistId;
 	let itemId = request.params.itemId;
 
 	itemService
 		.checkItem(checklistId, itemId)
-		.then(() => response.status(OK).end())
-		.catch(error => response.status(BAD_REQUEST).end());
+		.then(() => response.sendStatus(OK))
+		.catch(error => response.sendStatus(BAD_REQUEST));
 });
 
-router.put('/checklists/:checklistId/items/:itemId/uncheck', (request, response) => {
+router.put('/:username/checklists/:checklistId/items/:itemId/uncheck', (request, response) => {
 	let checklistId = request.params.checklistId;
 	let itemId = request.params.itemId;
 
 	itemService
 		.uncheckItem(checklistId, itemId)
-		.then(() => response.status(OK).end())
-		.catch(error => response.status(BAD_REQUEST).end());
+		.then(() => response.sendStatus(OK))
+		.catch(error => response.sendStatus(BAD_REQUEST));
 });
 
 export {router};

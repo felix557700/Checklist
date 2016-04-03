@@ -6,27 +6,28 @@ let writeSafe = {w: 1, j: true};
 export default class ChecklistService {
 	constructor() {}
 
-	findAll() {
+	getAllChecklists(username) {
 		return new Promise(function (resolve, reject) {
 			let collection = MongoDb.getDb().collection('test');
 
 			collection
-				.find({}, {_id: 0})
+				.find({username: username}, {_id: 0})
 				.toArray()
 				.then(checklists => resolve(checklists))
 				.catch(error => reject(error));
 		});
 	}
 
-	createNewChecklist(newChecklist) {
+	createNewChecklist(username, newChecklist) {
 		return new Promise(function (resolve, reject) {
 			let collection = MongoDb.getDb().collection('test');
 
 			newChecklist.checklistId = uuid();
+			newChecklist.username = username;
 
 			collection
 				.insertOne(newChecklist, writeSafe)
-				.then(documents => resolve(documents))
+				.then(() => resolve())
 				.catch(error => reject(error));
 		});
 	}
@@ -36,10 +37,10 @@ export default class ChecklistService {
 			let collection = MongoDb.getDb().collection('test');
 
 			collection
-				.find({checklistId: id})
+				.find({checklistId: id}, {_id: 0})
 				.limit(1)
 				.toArray()
-				.then(array => resolve(array[0]))
+				.then(checklists => resolve(checklists[0]))
 				.catch(error => reject(error));
 		});
 	}
@@ -51,7 +52,7 @@ export default class ChecklistService {
 			collection
 				.deleteOne({checklistId: id}, writeSafe)
 				.then(() => resolve())
-				.catch(err => reject(err));
+				.catch(error => reject(error));
 		});
 	}
 }
