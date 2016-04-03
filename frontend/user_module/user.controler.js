@@ -1,5 +1,6 @@
 class UserController {
-	constructor($scope, $state, UserService) {
+	constructor($rootScope, $scope, $state, UserService) {
+		this.rootScope = $rootScope;
 		this.user = $scope.user;
 		this.state = $state;
 		this.UserService = UserService;
@@ -7,8 +8,9 @@ class UserController {
 
 	login() {
 		return this.UserService
-			.loginUser(this.user.name, this.user.password)
+			.loginUser(this.user)
 			.then(result => {
+				this.rootScope.user = result.data.user;
 				localStorage.setItem('token', result.data.token);
 				this.state.go('checklist');
 			})
@@ -33,6 +35,6 @@ class UserController {
 	}
 }
 
-UserController.$inject = ['$scope', '$state', 'UserService'];
+UserController.$inject = ['$rootScope', '$scope', '$state', 'UserService'];
 
 export default UserController;

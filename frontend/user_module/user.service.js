@@ -3,7 +3,8 @@ class UserService {
 		this.http = $http;
 	}
 
-	loginUser(name, password) {
+	loginUser(user) {
+		let {name, password} = user;
 		return this.http.put('./api/users/login', {name, password});
 	}
 
