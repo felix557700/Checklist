@@ -1,8 +1,57 @@
 <div ng-controller="UserController as vm">
-	<input type="text" ng-model="vm.user.name"> {{vm.user.name}}
-	<input type="password" ng-model="vm.user.password"> {{vm.user.password}}
 
-	<button ng-click="vm.login()">login</button>
-	<button>logout</button>
-	<button ng-click="vm.register()">register</button>
+	<div class="login-container">
+		<form class="row">
+			<i class="fa fa-lock fa-5x" style="margin: 0 auto; display: table"></i>
+
+			<div class="col-xs-12 bottom-spacer">
+				<input type="text" class="form-control" placeholder="Name" ng-model="vm.user.name">
+			</div>
+
+			<div class="col-xs-12 bottom-spacer" style="display: flex">
+				<input type="password" class="form-control" placeholder="Password" ng-model="vm.user.password">
+				<i class="fa fa-eye fa-2x" style="position: absolute; right: 18px; bottom: 5px;" ng-click="vm.togglePasswordView()"></i>
+			</div>
+
+			<div class="col-xs-12 bottom-spacer">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox">Remember me
+					</label>
+				</div>
+			</div>
+
+			<div class="col-xs-12 bottom-spacer">
+				<button type="submit" class="btn btn-primary col-xs-6 col-xs-offset-3" ng-click="vm.login()">Login</button>
+			</div>
+
+			<div class="col-xs-12 top-spacer" style="text-align: center">
+				<a href="" ng-click="vm.openRegister()">Create new account</a>
+			</div>
+		</form>
+	</div>
+
+
+	<input type="checkbox">
+	<div class="register-form">
+		<form class="row">
+			<i class="fa fa-lock fa-5x" style="margin: 0 auto; display: table"></i>
+
+			<div class="col-xs-12 bottom-spacer">
+				<input type="text" class="form-control" placeholder="Name" ng-model="vm.user.name">
+			</div>
+
+			<div class="col-xs-12 bottom-spacer">
+				<input type="password" class="form-control" placeholder="Password" ng-model="vm.user.password">
+			</div>
+
+			<div class="col-xs-12 bottom-spacer">
+				<input type="password" class="form-control" placeholder="Repeat password" ng-model="vm.user.repeatedPassword">
+			</div>
+
+			<div class="col-xs-12 top-spacer">
+				<button type="submit" class="btn btn-primary col-xs-6 col-xs-offset-3" ng-click="vm.register()">Register</button>
+			</div>
+		</form>
+	</div>
 </div>

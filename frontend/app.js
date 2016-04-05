@@ -1,5 +1,4 @@
 import angular from 'angular'
-import uiRouter from 'angular-ui-router'
 import {} from 'user_module/user'
 import {} from 'checklist_module/checklist'
 import AuthInterceptor from './authenticationInterceptor';
@@ -7,7 +6,7 @@ import routes from './config'
 
 const app = angular
 	.module('myApp', [
-		uiRouter, 'user', 'checklist'
+		'ui.router', 'user', 'checklist'
 	])
 	.config(routes)
 	.config(['$httpProvider', $httpProvider => $httpProvider.interceptors.push('AuthInterceptor')])

@@ -4,9 +4,12 @@ import babel from 'gulp-babel';
 import sourcemaps from 'gulp-sourcemaps';
 import nodemon from 'gulp-nodemon';
 import relativeSource from 'gulp-relative-sourcemaps-source';
-import stylus from 'gulp-stylus';
 import runsequence from 'run-sequence';
 import shell from 'gulp-shell';
+import concat from 'gulp-concat';
+import minifyCss from 'gulp-clean-css';
+import sass from 'gulp-sass';
+import merge from 'merge-stream';
 
 // Set production flag
 var isProduction = process.env.IS_PRODUCTION || false;
@@ -58,8 +61,16 @@ gulp.task('copy:html', function () {
 });
 
 gulp.task('copy:css', function () {
-	gulp.src('./frontend/**/*.styl')
-		.pipe(stylus())
+	var cssStream = gulp.src(['./frontend/**/*.css'])
+		.pipe(concat('css-files.css'));
+
+	var sassStream = gulp.src(['./frontend/**/*.sass'])
+		.pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+		.pipe(concat('css-files.css'));
+
+	return merge(sassStream, cssStream)
+		.pipe(concat('styles.css'))
+		.pipe(minifyCss())
 		.pipe(gulp.dest('./frontend_public'));
 
 });

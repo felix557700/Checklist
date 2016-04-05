@@ -1,0 +1,44 @@
+$phones: 320px
+$phone-medium: 480px
+$tablets: 768px
+$laptops: 1024px
+$desktop: 1224px
+
+$white: #fff
+$primary-blue: #2196f3
+$register-color: #eee
+
+
+.register-form,
+.login-container
+	width: 90%
+	height: 400px
+	padding: 30px 5% 80px
+	margin: 0 auto
+	max-width: $phone-medium
+	border-radius: 10px
+	background-color: $white
+	box-shadow: 0 1px 4px rgba(0,0,0,0.12), 0 1px 7px rgba(0,0,0,0.24)
+	@media only screen and (max-width: $phone-medium)
+		width: 100%
+		margin: 0
+
+.register-form
+	position: fixed
+	top: -100%
+	right: 0
+	bottom: 0
+	left: 0
+	background-color: $register-color
+	overflow: hidden
+	transition: all 0.5s ease-in-out
+
+.top-spacer
+	margin-top: 10px
+.bottom-spacer
+	margin-bottom: 10px
+
+
+
+input[type=checkbox]:checked ~ .register-form
+	top: 23px
