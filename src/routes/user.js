@@ -1,6 +1,6 @@
 import express from 'express';
 import {Router} from 'express';
-import {OK, NO_CONTENT, BAD_REQUEST, FORBIDDEN, NOT_FOUND, CONFLICT} from './es6-http-status-codes';
+import {OK, NO_CONTENT, BAD_REQUEST, FORBIDDEN, CONFLICT, INTERNAL_SERVER_ERROR} from './es6-http-status-codes';
 import bcrypt from 'bcrypt-nodejs'
 import jwt from 'jsonwebtoken'
 import { v4 as uuid} from 'node-uuid'
@@ -15,14 +15,14 @@ user.put('/login', (request, response) => {
 	let {name, password} = request.body;
 
 	if (!name || !password) {
-		response.status(BAD_REQUEST).json();
+		response.sendStatus(BAD_REQUEST);
 	}
 
 	userService
 		.findUser(name)
 		.then(user => {
 			if (!user) {
-				response.status(NOT_FOUND).json();
+				response.sendStatus(BAD_REQUEST);
 				return;
 			}
 
@@ -32,15 +32,15 @@ user.put('/login', (request, response) => {
 				// else jwt.sign() -> return token + add to db async
 				// TODO filip(30/03/2016): if expired issue new token / on logout invalidate token
 
-				let data = {name: user.name};
-				let issuedToken = jwt.sign(data, secret, {expiresIn: 24 * 60 * 60, jwtid: name + uuid()});
+				let userData = {name: user.name};
+				let issuedToken = jwt.sign(userData, secret, {expiresIn: 24 * 60 * 60, jwtid: name + uuid()});
 
-				response.status(OK).json({name: user.name, token: issuedToken});
+				response.status(OK).json({user: userData, token: issuedToken});
 			} else {
-				response.status(FORBIDDEN).json();
+				response.sendStatus(FORBIDDEN);
 			}
 		})
-		.catch(error => response.status(BAD_REQUEST).json());
+		.catch(error => response.sendStatus(INTERNAL_SERVER_ERROR));
 });
 
 
@@ -48,7 +48,7 @@ user.put('/login', (request, response) => {
 //	let {name} = request.body;
 //
 //	if (!name) {
-//		response.status(BAD_REQUEST).json();
+//		response.sendStatus(BAD_REQUEST);
 //	}
 //
 //	//userService
@@ -58,9 +58,9 @@ user.put('/login', (request, response) => {
 //	//		response.status(OK).json(value);
 //	//	})
 //	//	.catch(() => {
-//	//		response.status(BAD_REQUEST).json();
+//	//		response.sendStatus(INTERNAL_SERVER_ERROR);
 //	//	})
-//	response.status(OK).json();
+//	response.sendStatus(OK);
 //});
 
 
@@ -68,7 +68,7 @@ user.post('/register', (request, response) => {
 	let {name, password} = request.body;
 
 	if (!name || !password) {
-		response.status(BAD_REQUEST).json();
+		response.sendStatus(BAD_REQUEST);
 	}
 
 	userService
@@ -80,14 +80,12 @@ user.post('/register', (request, response) => {
 				userService
 					.addUser(name, hashPassword)
 					.then(user => response.status(OK).json({name: name}))
-					.catch(error => response.status(BAD_REQUEST).json());
+					.catch(error => response.sendStatus(BAD_REQUEST));
 			} else {
-				response.status(CONFLICT).json()
+				response.sendStatus(CONFLICT);
 			}
 		})
-		.catch(error => response.status(BAD_REQUEST).json())
-
+		.catch(error => response.sendStatus(INTERNAL_SERVER_ERROR))
 });
-
 
 export {user}
