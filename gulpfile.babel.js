@@ -10,6 +10,7 @@ import concat from 'gulp-concat';
 import minifyCss from 'gulp-clean-css';
 import sass from 'gulp-sass';
 import merge from 'merge-stream';
+import autoprefixer from 'gulp-autoprefixer';
 
 // Set production flag
 var isProduction = process.env.IS_PRODUCTION || false;
@@ -70,6 +71,7 @@ gulp.task('copy:css', function () {
 
 	return merge(sassStream, cssStream)
 		.pipe(concat('styles.css'))
+		.pipe(autoprefixer({browsers: ['last 3 versions']}))
 		.pipe(minifyCss())
 		.pipe(gulp.dest('./frontend_public'));
 

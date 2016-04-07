@@ -6,32 +6,9 @@ $desktop: 1224px
 
 $white: #fff
 $primary-blue: #2196f3
-$register-color: #eee
+$light-gray: #eee
+$gray: #666
 
-
-.register-form,
-.login-container
-	width: 90%
-	height: 400px
-	padding: 30px 5% 80px
-	margin: 0 auto
-	max-width: $phone-medium
-	border-radius: 10px
-	background-color: $white
-	box-shadow: 0 1px 4px rgba(0,0,0,0.12), 0 1px 7px rgba(0,0,0,0.24)
-	@media only screen and (max-width: $phone-medium)
-		width: 100%
-		margin: 0
-
-.register-form
-	position: fixed
-	top: -100%
-	right: 0
-	bottom: 0
-	left: 0
-	background-color: $register-color
-	overflow: hidden
-	transition: all 0.5s ease-in-out
 
 .top-spacer
 	margin-top: 10px
@@ -39,6 +16,78 @@ $register-color: #eee
 	margin-bottom: 10px
 
 
+.register-form,
+.login-form
+	width: 90%
+	height: 400px
+	padding: 30px 10% 80px 10%
+	margin: 0 auto
+	max-width: $phone-medium
+	background-color: $white
+	box-shadow: 0 1px 4px rgba(0,0,0,0.12), 0 1px 7px rgba(0,0,0,0.24)
+	@media only screen and (max-width: $phone-medium)
+		width: 100%
+		margin: 0
 
-input[type=checkbox]:checked ~ .register-form
-	top: 23px
+	&.error
+		animation: shake 0.4s
+	.fa-lock
+		margin: 0 auto
+		display: table
+
+.register-form
+	position: fixed
+	top: 0
+	right: 0
+	left: 0
+	background-color: $light-gray
+	overflow: hidden
+	transform: translateY(-200%)
+	transition: transform 0.75s ease-in-out
+
+	&.open
+		transform: translateY(23px)
+		transition: transform 0.5s ease-in-out
+
+
+.register-close
+	position: absolute
+	right: 10px
+	top: 10px
+	width: 32px
+	height: 32px
+	opacity: 1
+
+	&::before,
+	&::after
+		content: ''
+		position: absolute
+		left: 15px
+		height: 33px
+		width: 2px
+		background-color: $gray
+	&::before
+		transform: rotate(45deg)
+	&::after
+		transform: rotate(-45deg)
+
+
+@mixin translate($x, $y)
+	transform: translate($x, $y)
+
+@mixin animationFrames($offset)
+	0%
+		@include translate(0, 0)
+	20%
+		@include translate($offset, 0)
+	40%
+		@include translate(-$offset, 0)
+	60%
+		@include translate($offset, 0)
+	80%
+		@include translate(-$offset, 0)
+	100%
+		@include translate(0, 0)
+
+@keyframes shake
+	@include animationFrames(20px)

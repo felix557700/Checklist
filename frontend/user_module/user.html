@@ -1,16 +1,19 @@
 <div ng-controller="UserController as vm">
 
-	<div class="login-container">
+	<div class="login-form" ng-class="{error: vm.shakeLogin}">
 		<form class="row">
-			<i class="fa fa-lock fa-5x" style="margin: 0 auto; display: table"></i>
+			<i class="fa fa-lock fa-5x" ng-class="{'text-danger': vm.isError}"></i>
 
 			<div class="col-xs-12 bottom-spacer">
-				<input type="text" class="form-control" placeholder="Name" ng-model="vm.user.name">
+				<input type="text" class="form-control" ng-model="vm.user.name" placeholder="Name" title="Name" maxlength="28"
+					   autofocus required/>
 			</div>
 
 			<div class="col-xs-12 bottom-spacer" style="display: flex">
-				<input type="password" class="form-control" placeholder="Password" ng-model="vm.user.password">
-				<i class="fa fa-eye fa-2x" style="position: absolute; right: 18px; bottom: 5px;" ng-click="vm.togglePasswordView()"></i>
+				<input type="{{vm.passwordType}}" class="form-control" ng-model="vm.user.password"
+					   placeholder="Password" title="Password" maxlength="28" required/>
+
+				<i class="fa fa-eye fa-2x" style="position: absolute; right: 18px; bottom: 5px;" ng-click="vm.togglePasswordType()"></i>
 			</div>
 
 			<div class="col-xs-12 bottom-spacer">
@@ -26,27 +29,27 @@
 			</div>
 
 			<div class="col-xs-12 top-spacer" style="text-align: center">
-				<a href="" ng-click="vm.openRegister()">Create new account</a>
+				<a href="" ng-click="vm.openRegistration()">Create new account</a>
 			</div>
 		</form>
 	</div>
 
-
-	<input type="checkbox">
-	<div class="register-form">
+	<div class="register-form" ng-class="{open: vm.openRegister, error: vm.shakeRegister}">
 		<form class="row">
-			<i class="fa fa-lock fa-5x" style="margin: 0 auto; display: table"></i>
+			<a href="" class="register-close" ng-click="vm.closeRegistration()"></a>
+			<i class="fa fa-lock fa-5x" ng-class="{'text-danger': vm.isError}"></i>
 
 			<div class="col-xs-12 bottom-spacer">
-				<input type="text" class="form-control" placeholder="Name" ng-model="vm.user.name">
+				<input type="text" class="form-control" placeholder="Name" ng-model="vm.user.name" title="Name" maxlength="28" autofocus required/>
+				<p class="text-danger" ng-if="vm.doesUserExist()">User already exist, please choose different name.</p>
 			</div>
 
 			<div class="col-xs-12 bottom-spacer">
-				<input type="password" class="form-control" placeholder="Password" ng-model="vm.user.password">
+				<input type="password" class="form-control" placeholder="Password" title="Password" ng-model="vm.user.password" required/>
 			</div>
 
 			<div class="col-xs-12 bottom-spacer">
-				<input type="password" class="form-control" placeholder="Repeat password" ng-model="vm.user.repeatedPassword">
+				<input type="password" class="form-control" placeholder="Repeat password" ng-model="vm.user.repeatedPassword" title="Repeat password" required/>
 			</div>
 
 			<div class="col-xs-12 top-spacer">
