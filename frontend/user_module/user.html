@@ -5,21 +5,23 @@
 			<i class="fa fa-lock fa-5x" ng-class="{'text-danger': vm.isError}"></i>
 
 			<div class="col-xs-12 bottom-spacer">
-				<input type="text" class="form-control" ng-model="vm.user.name" placeholder="Name" title="Name" maxlength="28"
-					   autofocus required/>
+				<input type="text" class="form-control" ng-model="vm.user.name" placeholder="Name" title="Name" maxlength="28" required/>
 			</div>
 
 			<div class="col-xs-12 bottom-spacer" style="display: flex">
 				<input type="{{vm.passwordType}}" class="form-control" ng-model="vm.user.password"
 					   placeholder="Password" title="Password" maxlength="28" required/>
 
-				<i class="fa fa-eye fa-2x" style="position: absolute; right: 18px; bottom: 5px;" ng-click="vm.togglePasswordType()"></i>
+				<span ng-click="vm.togglePasswordType()" ng-switch="vm.passwordType" style="position: absolute; right: 18px; bottom: 5px;">
+					<span ng-switch-when="password">Show</span>
+					<span ng-switch-when="text">Hide</span>
+				</span>
 			</div>
 
 			<div class="col-xs-12 bottom-spacer">
 				<div class="checkbox">
 					<label>
-						<input type="checkbox">Remember me
+						<input type="checkbox" ng-model="vm.rememberMe">Remember me
 					</label>
 				</div>
 			</div>
@@ -40,7 +42,7 @@
 			<i class="fa fa-lock fa-5x" ng-class="{'text-danger': vm.isError}"></i>
 
 			<div class="col-xs-12 bottom-spacer">
-				<input type="text" class="form-control" placeholder="Name" ng-model="vm.user.name" title="Name" maxlength="28" autofocus required/>
+				<input type="text" class="form-control" placeholder="Name" ng-model="vm.user.name" title="Name" maxlength="28"  required/>
 				<p class="text-danger" ng-if="vm.doesUserExist()">User already exist, please choose different name.</p>
 			</div>
 
@@ -49,7 +51,8 @@
 			</div>
 
 			<div class="col-xs-12 bottom-spacer">
-				<input type="password" class="form-control" placeholder="Repeat password" ng-model="vm.user.repeatedPassword" title="Repeat password" required/>
+				<input type="password" class="form-control" placeholder="Repeat password" ng-model="vm.user.repeatedPassword"
+					   title="Repeat password" required/>
 			</div>
 
 			<div class="col-xs-12 top-spacer">

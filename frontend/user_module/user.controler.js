@@ -15,7 +15,7 @@ class UserController {
 		}
 
 		this.UserService
-			.loginUser(this.user)
+			.loginUser(this.user, this.rememberMe)
 			.then(result => {
 				this.rootScope.user = result.data.user;
 				localStorage.setItem('token', result.data.token);

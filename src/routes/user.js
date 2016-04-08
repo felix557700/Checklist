@@ -1,6 +1,6 @@
 import express from 'express';
 import {Router} from 'express';
-import {OK, NO_CONTENT, BAD_REQUEST, FORBIDDEN, CONFLICT, INTERNAL_SERVER_ERROR} from './es6-http-status-codes';
+import {OK, NO_CONTENT, BAD_REQUEST, FORBIDDEN, CONFLICT} from './es6-http-status-codes';
 import bcrypt from 'bcrypt-nodejs'
 import jwt from 'jsonwebtoken'
 import { v4 as uuid} from 'node-uuid'
@@ -40,7 +40,7 @@ user.put('/login', (request, response) => {
 				response.sendStatus(FORBIDDEN);
 			}
 		})
-		.catch(error => response.sendStatus(INTERNAL_SERVER_ERROR));
+		.catch(error => response.sendStatus(BAD_REQUEST));
 });
 
 
@@ -58,7 +58,7 @@ user.put('/login', (request, response) => {
 //	//		response.status(OK).json(value);
 //	//	})
 //	//	.catch(() => {
-//	//		response.sendStatus(INTERNAL_SERVER_ERROR);
+//	//		response.sendStatus(BAD_REQUEST);
 //	//	})
 //	response.sendStatus(OK);
 //});
@@ -85,7 +85,7 @@ user.post('/register', (request, response) => {
 				response.sendStatus(CONFLICT);
 			}
 		})
-		.catch(error => response.sendStatus(INTERNAL_SERVER_ERROR))
+		.catch(error => response.sendStatus(BAD_REQUEST))
 });
 
 export {user}
