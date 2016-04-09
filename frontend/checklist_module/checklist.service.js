@@ -3,17 +3,24 @@ class ChecklistService {
 		this.http = $http;
 	}
 
-	getChecklists(name, password) {
-		return this.http.get('./api/checklists');
+	getChecklists(user) {
+		let name = 'filip';
+		return this.http.get(`./api/${name}/checklists`);
 	}
 
-	addChecklist(name, password) {
-		return this.http.post('./api/checklists', {name, password});
+	addChecklist(user, newChecklist) {
+		let {name} = user;
+		return this.http.post(`./api/${name}/checklists`, newChecklist);
 	}
 
-	deleteChecklist(){}
+	deleteChecklist(user, checklist) {
+		let {name} = user;
+		let {checklistId} = checklist;
+		return this.http.delete(`./api/${name}/checklists/${checklistId}`);
+	}
 
-	updateChecklist(){}
+	updateChecklist() {
+	}
 }
 
 ChecklistService.$inject = ['$http'];
