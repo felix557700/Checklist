@@ -18,7 +18,10 @@ class ChecklistController {
 		if (this.newChecklist) {
 			this.ChecklistService
 				.addChecklist(this.rootScope.user, this.newChecklist)
-				.then(result => this.checklists.push(result.data))
+				.then(result => {
+					this.checklists.push(result.data);
+					this.closeAddForm();
+				})
 				.catch(error => console.log('error checklist'));
 		}
 	}
@@ -28,6 +31,14 @@ class ChecklistController {
 			.deleteChecklist(this.rootScope.user, checklistId)
 			.then(result => console.log(result))
 			.catch(error => console.log('error checklist'));
+	}
+
+	openAddForm() {
+		this.activateAdd = true;
+	}
+
+	closeAddForm() {
+		this.activateAdd = false;
 	}
 
 	gotoChecklist(index) {

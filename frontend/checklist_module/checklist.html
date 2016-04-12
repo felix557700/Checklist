@@ -2,17 +2,47 @@
 	<div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="checklist in vm.checklists track by $index">
 		<div class="panel panel-default">
 			<div class="panel-body">
+
 				<div ng-click="vm.gotoChecklist($index)">
 					<h4>{{checklist.name}}</h4>
-					<span>Length: {{checklist.items.length}}</span>
+					<span>Number of items: {{checklist.items.length}}</span>
 				</div>
 
 				<div class="icon-wrapper">
-					<i class="pull-right fa fa-trash fa-2x" ng-click="vm.deleteChecklist()"></i>
-					<i class="pull-right fa fa-pencil fa-2x" ng-click="vm.editChecklist()"></i>
+					<i class="pull-right fa fa-trash fa-2x" ng-click="vm.deleteChecklist($index)"></i>
+					<i class="pull-right fa fa-pencil fa-2x" ng-click="vm.editChecklist($index)"></i>
 				</div>
 
 			</div>
 		</div>
+	</div>
+
+	<div class="fab" ng-class="{active: vm.activateAdd}">
+		<div class="add" ng-click="vm.openAddForm()">+</div>
+
+		<div class="add-content">
+			<div class="col-xs-12 col-sm-6 top-spacer bottom-spacer">
+				<input type="text"
+					   class="form-control"
+					   placeholder="Checklist name"
+					   title="Enter name"
+					   ng-model="newChecklist"
+					   maxlength="30"
+					   required/>
+			</div>
+
+			<div class="col-xs-11 col-xs-offset-1 col-sm-6 col-sm-offset-0">
+				<button class="btn btn-primary btn-space col-xs-5 col-sm-6" ng-click="vm.addChecklist()">Add</button>
+				<button class="btn btn-default btn-space col-xs-5 col-sm-6" ng-click="vm.closeAddForm()">Cancel</button>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="edit-checklist" style="display: none;">
+		<!-- TODO filip: change name, color and priority -->
+	</div>
+	<div class="delete-checklist" style="display: none;">
+		<!-- TODO filip: add text Do you want to delete 'name' checklist? Yes No 2 buttons -->
 	</div>
 </div>
