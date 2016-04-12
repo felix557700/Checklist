@@ -4,12 +4,14 @@ let routes = ($stateProvider, $urlRouterProvider, $locationProvider) => {
 			url: "/",
 			templateUrl: './user_module/user.html',
 			controller: 'UserController',
+			controllerAs: 'vm',
 			authenticate: false
 		})
 		.state('checklist', {
 			url: "/checklist",
 			templateUrl: './checklist_module/checklist.html',
 			controller: 'ChecklistController',
+			controllerAs: 'vm',
 			authenticate: true
 		});
 
