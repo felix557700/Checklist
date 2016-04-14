@@ -1,0 +1,14 @@
+<div>
+	<ul class="list-group">
+		<li class="list-group-item" ng-repeat="item in vm.items">
+			<div class="checkbox" style="display: inline;">
+				<label>
+					<input type="checkbox">
+					<span style="line-height:1; font-size: 18px; text-decoration: line-through; color: lightgray">{{item.text}}</span>
+				</label>
+			</div>
+
+			<i class="pull-right fa fa-ellipsis-v fa-2x"></i>
+		</li>
+	</ul>
+</div>

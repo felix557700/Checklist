@@ -1,13 +1,12 @@
 import angular from 'angular'
-import {} from 'user_module/user'
-import {} from 'checklist_module/checklist'
+import {} from './user_module/user'
+import {} from './checklist_module/checklist'
+import {} from './items_module/items'
 import AuthInterceptor from './authenticationInterceptor';
 import routes from './config'
 
 const app = angular
-	.module('myApp', [
-		'ui.router', 'user', 'checklist'
-	])
+	.module('myApp', ['ui.router', 'user', 'checklist', 'items'])
 	.config(routes)
 	.config(['$httpProvider', $httpProvider => $httpProvider.interceptors.push('AuthInterceptor')])
 	.factory('AuthInterceptor', AuthInterceptor)
@@ -18,6 +17,8 @@ const app = angular
 				event.preventDefault();
 				$state.go("authentication");
 			}
+
+			// TODO filip(14/04/2016): read user info from localStorage | solve refresh page problem
 		});
 	}]);
 

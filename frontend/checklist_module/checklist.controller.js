@@ -1,6 +1,7 @@
 class ChecklistController {
-	constructor($rootScope, $scope, ChecklistService) {
+	constructor($rootScope, $scope, $state, ChecklistService) {
 		this.rootScope = $rootScope;
+		this.state = $state;
 		this.ChecklistService = ChecklistService;
 		this.getAllChecklists();
 		this.checklists = [];
@@ -41,7 +42,8 @@ class ChecklistController {
 		this.activateAdd = false;
 	}
 
-	gotoChecklist(index) {
+	gotoItemsOfChecklist(index) {
+		this.state.go('items', {items: this.checklists[index].items});
 		console.log(index);
 	}
 
@@ -54,6 +56,6 @@ class ChecklistController {
 	}
 }
 
-ChecklistController.$inject = ['$rootScope', '$scope', 'ChecklistService'];
+ChecklistController.$inject = ['$rootScope', '$scope', '$state', 'ChecklistService'];
 
 export default ChecklistController;
