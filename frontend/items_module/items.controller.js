@@ -12,6 +12,20 @@ class ItemsController {
 			this.items = $state.params.items;
 		}
 	}
+
+	toggleItem(index) {
+		// TODO filip(15/04/2016): call API to save checked item
+	}
+
+	getPercentage() {
+		let totalItems = this.items.length;
+		let totalCheckedItems = this.items
+			.filter(element => element.checked)
+			.length;
+
+		console.log(totalCheckedItems / totalItems * 100);
+		return (totalCheckedItems / totalItems * 100) + '%';
+	}
 }
 
 ItemsController.$inject = ['$rootScope', '$scope', '$state', 'ItemsService'];
