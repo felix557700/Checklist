@@ -8,9 +8,9 @@ let AuthInterceptor = ($window, $q, $injector) => {
 			return request;
 		},
 		responseError: function (rejection) {
-			let token = rejection.config.headers.authorization;
-			if (rejection.status === 401 && !token) {
+			if (rejection.status === 401) {
 				localStorage.removeItem('token');
+				localStorage.removeItem('user');
 
 				let stateService = $injector.get('$state');
 				stateService.go('authentication');

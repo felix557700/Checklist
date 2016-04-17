@@ -16,6 +16,13 @@ const app = angular
 				// TODO: show error -> user not authenticated
 				event.preventDefault();
 				$state.go("authentication");
+				return;
+			}
+
+			if (toState.name === 'authentication' && localStorage.getItem('token')) {
+				event.preventDefault();
+				$state.go('checklist');
+				return;
 			}
 
 			let user = localStorage.getItem('user');
