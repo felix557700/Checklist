@@ -15,12 +15,12 @@ let routes = ($stateProvider, $urlRouterProvider, $locationProvider) => {
 			authenticate: true
 		})
 		.state('items', {
-			url: "/items",
+			url: "/checklist/:name/items",
 			templateUrl: './items_module/items.html',
 			controller: 'ItemsController',
 			controllerAs: 'vm',
 			params: {
-				items: null
+				checklist: null
 			},
 			authenticate: true
 		});

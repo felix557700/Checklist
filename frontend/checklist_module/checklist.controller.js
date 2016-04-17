@@ -43,8 +43,7 @@ class ChecklistController {
 	}
 
 	gotoItemsOfChecklist(index) {
-		this.state.go('items', {items: this.checklists[index].items});
-		console.log(index);
+		//this.state.go('items', {items: this.checklists[index].items});
 	}
 
 	editChecklist() {

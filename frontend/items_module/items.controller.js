@@ -1,15 +1,24 @@
+import ItemService from './items.service';
+
 class ItemsController {
-	constructor($rootScope, $scope, $state, ItemsService) {
+	constructor($rootScope, $scope, $state, $stateParams, ItemsService) {
 		this.rootScope = $rootScope;
 		this.state = $state;
 		this.ItemsService = ItemsService;
+		this.checklistName = $stateParams.name;
+		this.checklist = $stateParams.checklist;
+		this.newItem = {};
 
-		if (!$state.params.items) {
-			ItemsService.getItems(this.rootScope.user)
-				.then(items => this.items = items)
+		if (!this.checklistName) {
+			this.state.go('checklist');
+			return;
+		}
+
+		if (!this.checklist) {
+			this.ItemsService
+				.getChecklist(this.rootScope.user, this.checklistName)
+				.then(checklist => this.checklist = checklist)
 				.catch(error => console.log(error));
-		} else {
-			this.items = $state.params.items;
 		}
 	}
 
@@ -18,16 +27,32 @@ class ItemsController {
 	}
 
 	getPercentage() {
-		let totalItems = this.items.length;
-		let totalCheckedItems = this.items
+		let totalItems = this.checklist.items.length;
+		let totalCheckedItems = this.checklist.items
 			.filter(element => element.checked)
 			.length;
 
-		console.log(totalCheckedItems / totalItems * 100);
 		return (totalCheckedItems / totalItems * 100) + '%';
+	}
+
+	openAddForm() {
+		this.activateAdd = true;
+	}
+
+	closeAddForm() {
+		this.activateAdd = false;
+	}
+
+	addItem() {
+		if (!this.newItem.name) {
+			// TODO filip(16/04/2016): show error
+			return;
+		}
+
+		this.ItemsService.addItem(this.rootScope.user, this.checklist.checklistId, this.newItem);
 	}
 }
 
-ItemsController.$inject = ['$rootScope', '$scope', '$state', 'ItemsService'];
+ItemsController.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'ItemsService'];
 
 export default ItemsController;

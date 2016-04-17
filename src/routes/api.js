@@ -39,6 +39,15 @@ router.get('/:username/checklists/:id', (request, response) => {
 		.catch(error => response.sendStatus(BAD_REQUEST));
 });
 
+router.get('/:username/checklists/:name', (request, response) => {
+	let name = request.params.name;
+
+	checklistService
+		.getChecklist(name)
+		.then(checklist => response.status(OK).json(checklist))
+		.catch(error => response.sendStatus(BAD_REQUEST));
+});
+
 router.delete('/:username/checklists/:id', (request, response) => {
 	let id = request.params.id;
 

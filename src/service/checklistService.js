@@ -32,12 +32,12 @@ export default class ChecklistService {
 		});
 	}
 
-	getChecklist(id) {
+	getChecklist(name) {
 		return new Promise(function (resolve, reject) {
 			let collection = MongoDb.getDb().collection('test');
 
 			collection
-				.find({checklistId: id}, {_id: 0})
+				.find({name: name}, {_id: 0})
 				.limit(1)
 				.toArray()
 				.then(checklists => resolve(checklists[0]))

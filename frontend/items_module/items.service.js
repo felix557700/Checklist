@@ -3,7 +3,7 @@ class ItemsService {
 		this.http = $http;
 	}
 
-	getItems(user, checklistId) {
+	getChecklist(user, checklistId) {
 		let {name} = user;
 		return this.http.get(`./api/${name}/checklists/${checklistId}`);
 	}

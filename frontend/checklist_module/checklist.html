@@ -3,7 +3,7 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 
-				<div ng-click="vm.gotoItemsOfChecklist($index)">
+				<div class="pointer" ui-sref="items({name: checklist.name, checklist: checklist})">
 					<h4>{{checklist.name}}</h4>
 					<span>Number of items: {{checklist.items.length}}</span>
 				</div>
@@ -26,7 +26,7 @@
 					   class="form-control"
 					   placeholder="Checklist name"
 					   title="Enter name"
-					   ng-model="newChecklist"
+					   ng-model="vm.newChecklist"
 					   maxlength="30"
 					   required/>
 			</div>
