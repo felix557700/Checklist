@@ -18,7 +18,8 @@ const app = angular
 				$state.go("authentication");
 			}
 
-			// TODO filip(14/04/2016): read user info from localStorage | solve refresh page problem
+			let user = localStorage.getItem('user');
+			$rootScope.user = JSON.parse(user);
 		});
 	}]);
 

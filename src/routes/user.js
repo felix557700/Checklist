@@ -12,10 +12,11 @@ let userService = new UserService();
 let secret = process.env.SECRET || 'here is my secret';
 
 user.put('/login', (request, response) => {
-	let {name, password} = request.body;
+	let {name, password, rememberMe} = request.body;
 
 	if (!name || !password) {
 		response.sendStatus(BAD_REQUEST);
+		return;
 	}
 
 	userService
@@ -27,13 +28,11 @@ user.put('/login', (request, response) => {
 			}
 
 			if (bcrypt.compareSync(password, user.password)) {
-				// TODO filip(30/03/2016): save token in db / if token exist and not expired return token
-				// if (user.token) jwt.verify -> if expired -> renew -> return token
-				// else jwt.sign() -> return token + add to db async
-				// TODO filip(30/03/2016): if expired issue new token / on logout invalidate token
+				// TODO filip(17/04/2016): improve when user try to login from different devices
 
+				let expire = rememberMe ? '30 days' : '1 day';
 				let userData = {name: user.name};
-				let issuedToken = jwt.sign(userData, secret, {expiresIn: 24 * 60 * 60, jwtid: name + uuid()});
+				let issuedToken = jwt.sign(userData, secret, {expiresIn: expire, jwtid: name + uuid()});
 
 				response.status(OK).json({user: userData, token: issuedToken});
 			} else {

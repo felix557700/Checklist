@@ -15,9 +15,9 @@ class UserController {
 		}
 
 		this.UserService
-			.loginUser(this.user, this.rememberMe)
+			.loginUser(this.user)
 			.then(result => {
-				this.rootScope.user = result.data.user;
+				localStorage.setItem('user', JSON.stringify(result.data.user));
 				localStorage.setItem('token', result.data.token);
 				this.hideError();
 				this.state.go('checklist');
@@ -60,7 +60,7 @@ class UserController {
 
 		if (this.user.password === this.user.repeatedPassword) {
 			this.UserService
-				.registerUser(this.user.name, this.user.password)
+				.registerUser(this.user)
 				.then(result => {
 					this.user.name = result.data.name;
 					this.user.password = '';
@@ -72,6 +72,7 @@ class UserController {
 					this.showRegisterError();
 				});
 		} else {
+			this.showRegisterError();
 			// TODO filip(07/04/2016): error password and repeated are not matching
 		}
 	}
@@ -102,9 +103,8 @@ class UserController {
 		if (!this.error || !this.error.status) {
 			return false;
 		}
-		else {
-			return this.error.status === 409;
-		}
+
+		return this.error.status === 409;
 	}
 }
 
