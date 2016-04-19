@@ -4,7 +4,7 @@ class ChecklistService {
 	}
 
 	getChecklists(user) {
-		let name = 'filip';
+		let {name} = user;
 		return this.http.get(`./api/${name}/checklists`);
 	}
 
@@ -20,6 +20,7 @@ class ChecklistService {
 	}
 
 	updateChecklist() {
+		// TODO filip(19/04/2016): make update of checklist
 	}
 }
 

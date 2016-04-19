@@ -26,7 +26,7 @@ router.post('/:username/checklists', (request, response) => {
 
 	checklistService
 		.createNewChecklist(username, checklist)
-		.then(() => response.sendStatus(CREATED))
+		.then(newChecklist => response.status(CREATED).json(newChecklist))
 		.catch(error => response.sendStatus(BAD_REQUEST));
 });
 
@@ -53,7 +53,7 @@ router.delete('/:username/checklists/:id', (request, response) => {
 
 	checklistService
 		.deleteChecklist(id)
-		.then(() => response.status(NO_CONTENT).json())
+		.then(() => response.sendStatus(NO_CONTENT))
 		.catch(error => response.sendStatus(BAD_REQUEST));
 });
 

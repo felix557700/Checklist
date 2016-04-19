@@ -11,23 +11,32 @@ export default class ChecklistService {
 			let collection = MongoDb.getDb().collection('test');
 
 			collection
-				.find({username: username}, {_id: 0})
+				.find({username: username}, {_id: false})
 				.toArray()
 				.then(checklists => resolve(checklists))
 				.catch(error => reject(error));
 		});
 	}
 
-	createNewChecklist(username, newChecklist) {
+	createNewChecklist(username, {name}) {
 		return new Promise(function (resolve, reject) {
 			let collection = MongoDb.getDb().collection('test');
 
-			newChecklist.checklistId = uuid();
-			newChecklist.username = username;
+			let newChecklist = {
+				checklistId: uuid(),
+				username: username,
+				name: name,
+				priority: 0,
+				color: 'white',
+				items: []
+			};
 
 			collection
 				.insertOne(newChecklist, writeSafe)
-				.then(() => resolve())
+				.then(() => {
+					delete newChecklist._id;
+					resolve(newChecklist);
+				})
 				.catch(error => reject(error));
 		});
 	}
@@ -37,7 +46,7 @@ export default class ChecklistService {
 			let collection = MongoDb.getDb().collection('test');
 
 			collection
-				.find({name: name}, {_id: 0})
+				.find({name: name}, {_id: false})
 				.limit(1)
 				.toArray()
 				.then(checklists => resolve(checklists[0]))

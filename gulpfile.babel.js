@@ -42,12 +42,12 @@ gulp.task('dev', ['babel'], () => {
 	nodemon({
 		verbose: true,
 		ignore: ['.git', '.idea', 'node_modules/**/node_modules', 'test', './app'],
-		watch: ['./src', './public'],
+		watch: ['./src', './frontend'],
 		script: './app/server.js',
 		nodeArgs: ['--debug'],
 		ext: 'js json',
 		env: {'NODE_ENV': 'development'}
-	}).on('restart', ['babel']);
+	}).on('restart', ['build:frontend', 'babel']);
 });
 
 

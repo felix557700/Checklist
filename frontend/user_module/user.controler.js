@@ -19,6 +19,7 @@ class UserController {
 			.then(result => {
 				localStorage.setItem('user', JSON.stringify(result.data.user));
 				localStorage.setItem('token', result.data.token);
+				this.user = undefined;
 				this.hideError();
 				this.state.go('checklist');
 			})
@@ -64,6 +65,7 @@ class UserController {
 				.then(result => {
 					this.user.name = result.data.name;
 					this.user.password = '';
+					this.user.repeatedPassword = '';
 					this.hideError();
 					this.closeRegistration();
 				})
