@@ -12,8 +12,7 @@ import sass from 'gulp-sass';
 import merge from 'merge-stream';
 import autoprefixer from 'gulp-autoprefixer';
 
-// Set production flag
-var isProduction = process.env.IS_PRODUCTION || false;
+var environment = process.env.NODE_ENV || 'development';
 
 const paths = {
 	js: ['./src/**/*.js'],
@@ -25,7 +24,7 @@ gulp.task('clean', callback => {
 });
 
 gulp.task('babel', () => {
-	if (isProduction) {
+	if (environment === 'production') {
 		return gulp.src(paths.js)
 			.pipe(babel())
 			.pipe(gulp.dest(paths.destination));

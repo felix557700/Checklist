@@ -1,1 +1,1 @@
-web: npm run babel && npm run start
+web: npm run build-heroku && npm run node

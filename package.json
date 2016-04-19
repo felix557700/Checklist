@@ -13,6 +13,7 @@
     "bundle-watch": "webpack --watch --colors --display-modules --display-error-details --config webpack.config.js",
     "bundle-production": "webpack -p --config webpack.prod.config.js",
     "start": "npm run bundle & npm run node",
+    "build-heroku": "./node_modules/.bin/gulp babel build:frontend",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
