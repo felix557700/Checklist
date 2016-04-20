@@ -1,7 +1,8 @@
 class ChecklistController {
-	constructor($rootScope, $scope, $state, ChecklistService) {
+	constructor($rootScope, $scope, $state, $timeout, ChecklistService) {
 		this.rootScope = $rootScope;
 		this.state = $state;
+		this.timeout = $timeout;
 		this.ChecklistService = ChecklistService;
 		this.getAllChecklists();
 		this.checklists = [];
@@ -37,6 +38,14 @@ class ChecklistController {
 
 	openAddForm() {
 		this.activateAdd = true;
+		this.focusOn('checklist-add');
+	}
+
+	focusOn(id) {
+		let element = document.getElementById(id);
+		if (element) {
+			this.timeout(() => element.focus());
+		}
 	}
 
 	closeAddForm() {
@@ -48,6 +57,6 @@ class ChecklistController {
 	}
 }
 
-ChecklistController.$inject = ['$rootScope', '$scope', '$state', 'ChecklistService'];
+ChecklistController.$inject = ['$rootScope', '$scope', '$state', '$timeout', 'ChecklistService'];
 
 export default ChecklistController;

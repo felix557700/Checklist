@@ -1,9 +1,10 @@
 import ItemService from './items.service';
 
 class ItemsController {
-	constructor($rootScope, $scope, $state, $stateParams, ItemsService) {
+	constructor($rootScope, $scope, $state, $stateParams, $timeout, ItemsService) {
 		this.rootScope = $rootScope;
 		this.state = $state;
+		this.timeout = $timeout;
 		this.ItemsService = ItemsService;
 		this.checklistName = $stateParams.name;
 		this.checklist = $stateParams.checklist;
@@ -37,6 +38,14 @@ class ItemsController {
 
 	openAddForm() {
 		this.activateAdd = true;
+		this.focusOn('item-add');
+	}
+
+	focusOn(id) {
+		let element = document.getElementById(id);
+		if (element) {
+			this.timeout(() => element.focus());
+		}
 	}
 
 	closeAddForm() {
@@ -53,6 +62,6 @@ class ItemsController {
 	}
 }
 
-ItemsController.$inject = ['$rootScope', '$scope', '$state', '$stateParams', 'ItemsService'];
+ItemsController.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$timeout', 'ItemsService'];
 
 export default ItemsController;
