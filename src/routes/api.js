@@ -30,15 +30,6 @@ router.post('/:username/checklists', (request, response) => {
 		.catch(error => response.sendStatus(BAD_REQUEST));
 });
 
-router.get('/:username/checklists/:id', (request, response) => {
-	let id = request.params.id;
-
-	checklistService
-		.getChecklist(id)
-		.then(checklist => response.status(OK).json(checklist))
-		.catch(error => response.sendStatus(BAD_REQUEST));
-});
-
 router.get('/:username/checklists/:name', (request, response) => {
 	let name = request.params.name;
 

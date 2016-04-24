@@ -48,7 +48,7 @@ export default class ItemService {
 			let collection = MongoDb.getDb().collection('test');
 
 			collection
-				.updateOne({checklistId: checklistId, 'items.itemId': itemId}, {$set: {'items.$.checked': true}}, writeSafe)
+				.updateOne({'items.itemId': itemId}, {$set: {'items.$.checked': true}}, writeSafe)
 				.then(() => resolve())
 				.catch(err => reject(err));
 		});
@@ -59,7 +59,7 @@ export default class ItemService {
 			let collection = MongoDb.getDb().collection('test');
 
 			collection
-				.updateOne({checklistId: checklistId, 'items.itemId': itemId}, {$set: {'items.$.checked': false}}, writeSafe)
+				.updateOne({'items.itemId': itemId}, {$set: {'items.$.checked': false}}, writeSafe)
 				.then(() => resolve())
 				.catch(err => reject(err));
 		});

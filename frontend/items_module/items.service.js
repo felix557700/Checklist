@@ -3,14 +3,25 @@ class ItemsService {
 		this.http = $http;
 	}
 
-	getChecklist(user, checklistId) {
+	getChecklist(user, checklistName) {
 		let {name} = user;
-		return this.http.get(`./api/${name}/checklists/${checklistId}`);
+		return this.http.get(`./api/${name}/checklists/${checklistName}`);
 	}
 
-	addItem(user, checklistId, newItem) {
+	addItem(user, checklistName, newItem) {
 		let {name} = user;
-		return this.http.post(`./api/${name}/checklists/${checklistId}/items`, newItem);
+		return this.http.post(`./api/${name}/checklists/${checklistName}/items`, newItem);
+	}
+
+	toggleItem(user, checklistName, item) {
+		let {name} = user;
+		let {itemId, checked} = item;
+
+		if (checked) {
+			return this.http.put(`./api/${name}/checklists/${checklistName}/items/${itemId}/check`);
+		} else {
+			return this.http.put(`./api/${name}/checklists/${checklistName}/items/${itemId}/uncheck`);
+		}
 	}
 }
 

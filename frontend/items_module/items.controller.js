@@ -24,7 +24,13 @@ class ItemsController {
 	}
 
 	toggleItem(index) {
-		// TODO filip(15/04/2016): call API to save checked item
+		let user = this.rootScope.user;
+		let checklistName = this.checklistName;
+		let item = this.checklist.items[index];
+
+		this.ItemsService
+			.toggleItem(user, checklistName, item)
+			.catch(error => this.checklist.items[index].checked = false);
 	}
 
 	getPercentage() {
@@ -58,7 +64,7 @@ class ItemsController {
 			return;
 		}
 
-		this.ItemsService.addItem(this.rootScope.user, this.checklist.checklistId, this.newItem);
+		this.ItemsService.addItem(this.rootScope.user, this.checklistName, this.newItem);
 	}
 }
 
