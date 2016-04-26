@@ -30,11 +30,11 @@ router.post('/:username/checklists', (request, response) => {
 		.catch(error => response.sendStatus(BAD_REQUEST));
 });
 
-router.get('/:username/checklists/:name', (request, response) => {
-	let name = request.params.name;
+router.get('/:username/checklists/:checklistName', (request, response) => {
+	let checklistName = request.params.checklistName;
 
 	checklistService
-		.getChecklist(name)
+		.getChecklist(checklistName)
 		.then(checklist => response.status(OK).json(checklist))
 		.catch(error => response.sendStatus(BAD_REQUEST));
 });
@@ -51,22 +51,22 @@ router.delete('/:username/checklists/:id', (request, response) => {
 
 //-------------------- API for items of checklist --------------------//
 
-router.get('/:username/checklists/:checklistId/items', (request, response) => {
-	let checklistId = request.params.checklistId;
+router.get('/:username/checklists/:checklistName/items', (request, response) => {
+	let checklistName = request.params.checklistName;
 
 	itemService
-		.getItemsOfChecklist(checklistId)
+		.getItemsOfChecklist(checklistName)
 		.then(items => response.status(OK).json(items))
 		.catch(error => response.sendStatus(BAD_REQUEST));
 });
 
-router.post('/:username/checklists/:checklistId/items', (request, response) => {
-	let checklistId = request.params.checklistId;
+router.post('/:username/checklists/:checklistName/items', (request, response) => {
+	let checklistName = request.params.checklistName;
 	let item = request.body;
 
 	itemService
-		.createNewItem(checklistId, item)
-		.then(() => response.sendStatus(CREATED))
+		.createNewItem(checklistName, item)
+		.then(item => response.status(CREATED).json(item))
 		.catch(error => response.sendStatus(BAD_REQUEST));
 });
 

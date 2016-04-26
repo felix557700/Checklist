@@ -7,12 +7,12 @@ export default class ItemService {
 	constructor() {
 	}
 
-	getItemsOfChecklist(checklistId) {
+	getItemsOfChecklist(checklistName) {
 		return new Promise(function (resolve, reject) {
 			let collection = MongoDb.getDb().collection('test');
 
 			collection
-				.find({checklistId: checklistId})
+				.find({name: checklistName})
 				.limit(1)
 				.toArray()
 				.then(checklists => resolve(checklists[0].items))
@@ -20,14 +20,19 @@ export default class ItemService {
 		});
 	}
 
-	createNewItem(checklistId, newItem) {
+	createNewItem(checklistName, newItem) {
 		return new Promise(function (resolve, reject) {
 			let collection = MongoDb.getDb().collection('test');
 
+			newItem.checked = false;
+			newItem.flagged = false;
+			newItem.note = '';
+			newItem.priority = 0;
 			newItem.itemId = uuid();
+
 			collection
-				.updateOne({checklistId: checklistId}, {$push: {items: newItem}}, writeSafe)
-				.then(() => resolve())
+				.updateOne({name: checklistName}, {$push: {items: newItem}}, writeSafe)
+				.then(() => resolve(newItem))
 				.catch(error => reject(error));
 		});
 	}

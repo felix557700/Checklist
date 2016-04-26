@@ -16,9 +16,12 @@ class ItemsController {
 		}
 
 		if (!this.checklist) {
+			let vm = this;
 			this.ItemsService
 				.getChecklist(this.rootScope.user, this.checklistName)
-				.then(checklist => this.checklist = checklist)
+				.then(result => {
+					vm.checklist = result.data;
+				})
 				.catch(error => console.log(error));
 		}
 	}
@@ -59,12 +62,22 @@ class ItemsController {
 	}
 
 	addItem() {
-		if (!this.newItem.name) {
+
+		if (!this.newItem.text) {
 			// TODO filip(16/04/2016): show error
 			return;
 		}
 
-		this.ItemsService.addItem(this.rootScope.user, this.checklistName, this.newItem);
+		let vm = this;
+		this.ItemsService.addItem(this.rootScope.user, this.checklistName, this.newItem)
+			.then(function(result) {
+				let createdItem = result.data;
+
+				vm.newItem = {};
+				vm.checklist.items.push(createdItem);
+				vm.closeAddForm();
+			})
+			.catch(error => console.log(error));
 	}
 }
 
