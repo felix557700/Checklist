@@ -2,20 +2,18 @@
 	<div class="progress-bar" ng-style="{width: vm.getPercentage()}"></div>
 </div>
 
-<div>
-	<ul class="list-group">
-		<li class="list-group-item" ng-repeat="item in vm.checklist.items track by $index">
-			<div class="checkbox" style="display: inline;">
-				<label>
-					<input type="checkbox" ng-model="item.checked" ng-change="vm.toggleItem($index)">
-					<span class="item-text" ng-class="{checked: item.checked}">{{item.text}}</span>
-				</label>
-			</div>
-
-			<i class="pull-right fa fa-ellipsis-v fa-2x"></i>
-		</li>
-	</ul>
-</div>
+<ul ng-sortable="sortableConfig">
+	<li class="item-container" ng-repeat="item in vm.checklist.items track by $index">
+		<div class="checkbox inline">
+			<label class="checkbox-label">
+				<input type="checkbox" ng-model="item.checked" ng-change="vm.toggleItem($index)">
+				<span class="checkbox-text" ng-class="{checked: item.checked}">{{item.text}}</span>
+			</label>
+		</div>
+		<i class="pull-right fa fa-bars fa-2x handle" ng-click="showDelete = !showDelete"></i>
+		<i class="pull-right fa fa-trash fa-2x" ng-if="showDelete"></i>
+	</li>
+</ul>
 
 <div class="fab" ng-class="{active: vm.activateAdd}">
 	<div class="add" ng-click="vm.openAddForm()">+</div>

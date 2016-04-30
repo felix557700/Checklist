@@ -24,6 +24,24 @@ class ItemsController {
 				})
 				.catch(error => console.log(error));
 		}
+
+		$scope.sortableConfig = {
+			animation: 150,
+			delay: 0,
+			handle: ".handle",
+			onStart: function(a,b) {
+				//console.clear();
+				//var items = $filter('filter')(a.models, { text: $scope.query });
+				//console.log('Your selected item: ' + items[a.oldIndex].text);
+			},
+			onSort: function(a,b){
+				//var items = $filter('filter')(a.models, { text: $scope.query });
+				//console.log('Your selected item: ' + items[a.oldIndex].text);
+			},
+			onEnd: function() {
+				//console.log('default onEnd()');
+			}
+		};
 	}
 
 	toggleItem(index) {
@@ -37,7 +55,12 @@ class ItemsController {
 	}
 
 	getPercentage() {
+		if (!this.checklist){
+			return '0%';
+		}
+
 		let totalItems = this.checklist.items.length;
+
 		let totalCheckedItems = this.checklist.items
 			.filter(element => element.checked)
 			.length;
