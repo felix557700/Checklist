@@ -1,8 +1,10 @@
 $fast-out-slow-in: cubic-bezier(0.4, 0, 0.2, 1)
 $primary-blue: #2196f3
+$white: #fff
 
 h4
 	margin-top: 0
+	word-wrap: break-word
 
 .pointer
 	cursor: pointer
@@ -18,13 +20,6 @@ h4
 	position: absolute
 	bottom: 10px
 	right: 10px
-
-	.fa:active
-		color: cornflowerblue
-
-	//fix margin between icons
-	.fa.pull-right
-		margin-left: 0.7em
 
 .fab
 	position: fixed
@@ -73,3 +68,22 @@ h4
 	margin: 5px
 	@media screen and (min-width: 544px)
 		margin: 10px 0
+
+.checklist
+	// placeholder for draggable element
+	.sortable-ghost
+		.panel-body
+			border: 2px dashed gray
+
+	// draggable element
+	.sortable-fallback
+		.panel
+			border: 0
+			box-shadow: none
+			background-color: rgba(255, 255, 255, 0)
+
+	// hide elements when dragging
+	.sortable-ghost .panel-body *,
+	.sortable-fallback .fa-trash,
+	.sortable-fallback .fa-pencil
+		opacity: 0

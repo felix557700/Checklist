@@ -36,20 +36,21 @@ $primary-blue: #2196f3
 	width: 35px
 	text-align: center
 
-// placeholder for draggable element
-.sortable-ghost 
-	color: $white
-	background-color: $white
-	border: 2px dashed gray
-	margin-bottom: 0
+.items
+	// placeholder for draggable element
+	.sortable-ghost
+		color: $white
+		background-color: $white
+		border: 2px dashed gray
+		margin-bottom: 0
 
-// draggable element
-.sortable-fallback
-	border: 0
-	background-color: rgba(255, 255, 255, 0)
+	// draggable element
+	.sortable-fallback
+		border: 0
+		background-color: rgba(255, 255, 255, 0)
 
-// hide elements when dragging
-.sortable-ghost .checkbox,
-.sortable-fallback input,
-.sortable-fallback .fa-trash
-	opacity: 0
+	// hide elements when dragging
+	.sortable-ghost .checkbox,
+	.sortable-fallback input,
+	.sortable-fallback .fa-trash
+		opacity: 0

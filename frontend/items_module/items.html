@@ -2,7 +2,7 @@
 	<div class="progress-bar" ng-style="{width: vm.getPercentage()}"></div>
 </div>
 
-<ul ng-sortable="sortableConfig">
+<ul class="items" ng-sortable="sortableConfig">
 	<li class="item-container" ng-repeat="item in vm.checklist.items track by $index">
 		<div class="checkbox inline">
 			<label class="checkbox-label">
@@ -10,6 +10,7 @@
 				<span class="checkbox-text" ng-class="{checked: item.checked}">{{item.text}}</span>
 			</label>
 		</div>
+		<!-- TODO: fix bug by binding showDelete to the item -->
 		<i class="pull-right fa fa-bars fa-2x handle" ng-click="showDelete = !showDelete"></i>
 		<i class="pull-right fa fa-trash fa-2x" ng-if="showDelete"></i>
 	</li>

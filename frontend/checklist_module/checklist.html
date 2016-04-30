@@ -1,21 +1,24 @@
 <div>
-	<div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="checklist in vm.checklists track by $index">
-		<div class="panel panel-default">
-			<div class="panel-body">
+	<ul class="checklist" ng-sortable="sortableConfig">
+		<li class="col-xs-12 col-sm-6 col-md-4" ng-repeat="checklist in vm.checklists track by $index">
+			<div class="panel panel-default">
+				<div class="panel-body">
 
-				<div class="pointer" ui-sref="items({name: checklist.name, checklist: checklist})">
-					<h4>{{checklist.name}}</h4>
-					<span>Number of items: {{checklist.items.length}}</span>
+					<div class="pointer" ui-sref="items({name: checklist.name, checklist: checklist})">
+						<h4>{{checklist.name}}</h4>
+						<span>Number of items: {{checklist.items.length}}</span>
+					</div>
+
+					<div class="icon-wrapper">
+						<!--TODO: bind showDelete to the chesklist-->
+						<i class="pull-right fa fa-bars fa-2x handle" ng-click="showDelete = !showDelete"></i>
+						<i class="pull-right fa fa-trash fa-2x" ng-if="showDelete" ng-click="vm.deleteChecklist($index)"></i>
+					</div>
+
 				</div>
-
-				<div class="icon-wrapper">
-					<i class="pull-right fa fa-trash fa-2x" ng-click="vm.deleteChecklist($index)"></i>
-					<i class="pull-right fa fa-pencil fa-2x" ng-click="vm.editChecklist($index)"></i>
-				</div>
-
 			</div>
-		</div>
-	</div>
+		</li>
+	</ul>
 
 	<div class="fab" ng-class="{active: vm.activateAdd}">
 		<div class="add" ng-click="vm.openAddForm()">+</div>
