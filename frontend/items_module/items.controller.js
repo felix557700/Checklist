@@ -119,14 +119,20 @@ class ItemsController {
 
 	openModal(index) {
 		let body = document.querySelector('body');
+		let items = document.querySelector('.items');
 		body.classList.add('modal-open');
+		items.classList.add('blur');
+
 		this.showModal = true;
 		this.itemToDelete = this.checklist.items[index];
 	}
 
 	closeModal() {
 		let body = document.querySelector('body');
+		let items = document.querySelector('.items');
 		body.classList.remove('modal-open');
+		items.classList.remove('blur');
+
 		this.showModal = false;
 		this.itemToDelete = undefined;
 	}

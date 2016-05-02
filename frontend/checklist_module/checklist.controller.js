@@ -80,14 +80,20 @@ class ChecklistController {
 
 	openModal(index) {
 		let body = document.querySelector('body');
+		let checklist = document.querySelector('.checklist');
 		body.classList.add('modal-open');
+		checklist.classList.add('blur');
+
 		this.showModal = true;
 		this.checklistToDelete = this.checklists[index];
 	}
 
 	closeModal() {
 		let body = document.querySelector('body');
+		let checklist = document.querySelector('.checklist');
 		body.classList.remove('modal-open');
+		checklist.classList.remove('blur');
+
 		this.showModal = false;
 		this.checklistToDelete = undefined;
 	}
