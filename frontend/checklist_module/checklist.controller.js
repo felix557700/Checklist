@@ -47,10 +47,18 @@ class ChecklistController {
 		}
 	}
 
-	deleteChecklist(index) {
+	deleteChecklist() {
+		if (!this.checklistToDelete) {
+			return;
+		}
+
+		let vm = this;
 		this.ChecklistService
-			.deleteChecklist(this.rootScope.user, this.checklists[index])
-			.then(result => this.checklists.splice(index, 1))
+			.deleteChecklist(this.rootScope.user, this.checklistToDelete)
+			.then(result => {
+				vm.checklists = vm.checklists.filter(checklist => checklist !== vm.checklistToDelete);
+				vm.closeModal();
+			})
 			.catch(error => console.log('error checklist'));
 	}
 
@@ -70,8 +78,18 @@ class ChecklistController {
 		this.activateAdd = false;
 	}
 
-	editChecklist() {
-		console.log('edit');
+	openModal(index) {
+		let body = document.querySelector('body');
+		body.classList.add('modal-open');
+		this.showModal = true;
+		this.checklistToDelete = this.checklists[index];
+	}
+
+	closeModal() {
+		let body = document.querySelector('body');
+		body.classList.remove('modal-open');
+		this.showModal = false;
+		this.checklistToDelete = undefined;
 	}
 }
 

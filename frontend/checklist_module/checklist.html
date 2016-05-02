@@ -12,7 +12,7 @@
 					<div class="icon-wrapper">
 						<!--TODO: bind showDelete to the chesklist-->
 						<i class="pull-right fa fa-bars fa-2x handle" ng-click="showDelete = !showDelete"></i>
-						<i class="pull-right fa fa-trash fa-2x" ng-if="showDelete" ng-click="vm.deleteChecklist($index)"></i>
+						<i class="pull-right fa fa-trash fa-2x" ng-if="showDelete" ng-click="vm.openModal($index)"></i>
 					</div>
 
 				</div>
@@ -43,10 +43,20 @@
 	</div>
 
 
-	<div class="edit-checklist" style="display: none;">
-		<!-- TODO filip: change name, color and priority -->
+	<div class="modal fade in" ng-class="{'modal-open-flex': vm.showModal}">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header"></div>
+				<div class="modal-body">
+					<h4>Delete checklist:</h4>
+					<h4>{{vm.checklistToDelete.name}}</h4>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" ng-click="vm.closeModal()">Cancel</button>
+					<button type="button" class="btn btn-danger" ng-click="vm.deleteChecklist()">Delete</button>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="delete-checklist" style="display: none;">
-		<!-- TODO filip: add text Do you want to delete 'name' checklist? Yes No 2 buttons -->
-	</div>
+	<div class="hide modal-backdrop fade in" ng-class="{show: vm.showModal}"></div>
 </div>

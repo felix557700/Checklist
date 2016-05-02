@@ -37,12 +37,12 @@ export default class ItemService {
 		});
 	}
 
-	deleteItemFromChecklist(checklistId, itemId) {
+	deleteItemFromChecklist(checklistName, itemId) {
 		return new Promise(function (resolve, reject) {
 			let collection = MongoDb.getDb().collection('test');
 
 			collection
-				.updateOne({checklistId: checklistId}, {'$pull': {items: {itemId: itemId}}}, writeSafe)
+				.updateOne({name: checklistName}, {'$pull': {items: {itemId: itemId}}}, writeSafe)
 				.then(() => resolve())
 				.catch(error => reject(error));
 		});

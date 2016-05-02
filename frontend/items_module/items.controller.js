@@ -102,6 +102,34 @@ class ItemsController {
 			})
 			.catch(error => console.log(error));
 	}
+
+	deleteItem() {
+		if (!this.itemToDelete) {
+			return;
+		}
+
+		let vm = this;
+		this.ItemsService
+			.deleteItem(this.rootScope.user, this.checklistName, this.itemToDelete)
+			.then(() => {
+				vm.checklist.items = vm.checklist.items.filter(item => item !== vm.itemToDelete);
+				vm.closeModal();
+			});
+	}
+
+	openModal(index) {
+		let body = document.querySelector('body');
+		body.classList.add('modal-open');
+		this.showModal = true;
+		this.itemToDelete = this.checklist.items[index];
+	}
+
+	closeModal() {
+		let body = document.querySelector('body');
+		body.classList.remove('modal-open');
+		this.showModal = false;
+		this.itemToDelete = undefined;
+	}
 }
 
 ItemsController.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$timeout', 'ItemsService'];

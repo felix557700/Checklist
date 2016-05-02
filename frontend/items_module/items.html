@@ -12,7 +12,7 @@
 		</div>
 		<!-- TODO: fix bug by binding showDelete to the item -->
 		<i class="pull-right fa fa-bars fa-2x handle" ng-click="showDelete = !showDelete"></i>
-		<i class="pull-right fa fa-trash fa-2x" ng-if="showDelete"></i>
+		<i class="pull-right fa fa-trash fa-2x" ng-if="showDelete" ng-click="vm.openModal($index)"></i>
 	</li>
 </ul>
 
@@ -37,3 +37,20 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade in" ng-class="{'modal-open-flex': vm.showModal}">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header"></div>
+			<div class="modal-body">
+				<h4>Delete item:</h4>
+				<h4>{{vm.itemToDelete.text}}</h4>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" ng-click="vm.closeModal()">Cancel</button>
+				<button type="button" class="btn btn-danger" ng-click="vm.deleteItem()">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="hide modal-backdrop fade in" ng-class="{show: vm.showModal}"></div>

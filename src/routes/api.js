@@ -70,12 +70,12 @@ router.post('/:username/checklists/:checklistName/items', (request, response) =>
 		.catch(error => response.sendStatus(BAD_REQUEST));
 });
 
-router.delete('/:username/checklists/:checklistId/items/:itemId', (request, response) => {
-	let checklistId = request.params.checklistId;
+router.delete('/:username/checklists/:checklistName/items/:itemId', (request, response) => {
+	let checklistName = request.params.checklistName;
 	let itemId = request.params.itemId;
 
 	itemService
-		.deleteItemFromChecklist(checklistId, itemId)
+		.deleteItemFromChecklist(checklistName, itemId)
 		.then(() => response.sendStatus(NO_CONTENT))
 		.catch(error => response.sendStatus(BAD_REQUEST));
 });
