@@ -21,8 +21,8 @@ router.get('/:username/checklists', (request, response) => {
 });
 
 router.post('/:username/checklists', (request, response) => {
-	let username = request.params.username;
-	let checklist = request.body;
+	let username = request.params.username,
+		checklist = request.body;
 
 	checklistService
 		.createNewChecklist(username, checklist)
@@ -70,7 +70,7 @@ router.post('/:username/checklists/:checklistName/items', (request, response) =>
 		.catch(error => response.sendStatus(BAD_REQUEST));
 });
 
-router.put('/:username/checklists/:checklistName/items', (request, response) => {
+router.put('/:username/checklists/:checklistName/items/reorder', (request, response) => {
 	let checklistName = request.params.checklistName;
 	let items = request.body;
 

@@ -12,17 +12,8 @@ class ChecklistController {
 			animation: 150,
 			delay: 0,
 			handle: ".handle",
-			onStart: function (a, b) {
-				//console.clear();
-				//var items = $filter('filter')(a.models, { text: $scope.query });
-				//console.log('Your selected item: ' + items[a.oldIndex].text);
-			},
-			onSort: function (a, b) {
-				//var items = $filter('filter')(a.models, { text: $scope.query });
-				//console.log('Your selected item: ' + items[a.oldIndex].text);
-			},
-			onEnd: function () {
-				//console.log('default onEnd()');
+			onUpdate: function () {
+				// TODO filip(03/05/2016): ???complicated to save into db???
 			}
 		};
 	}
