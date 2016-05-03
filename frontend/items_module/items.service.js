@@ -23,7 +23,7 @@ class ItemsService {
 	updateItems(user, checklistName, items) {
 		let {name} = user;
 
-		return this.http.put(`./api/${name}/checklists/${checklistName}/items`, items);
+		return this.http.put(`./api/${name}/checklists/${checklistName}/items/reorder`, items);
 	}
 
 	toggleItem(user, checklistName, item) {
