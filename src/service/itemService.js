@@ -37,6 +37,17 @@ export default class ItemService {
 		});
 	}
 
+	updateItems(checklistName, items) {
+		return new Promise(function (resolve, reject) {
+			let collection = MongoDb.getDb().collection('test');
+
+			collection
+				.updateOne({name: checklistName}, {$set: {items: items}}, writeSafe)
+				.then(() => resolve())
+				.catch(error => reject(error));
+		});
+	}
+
 	deleteItemFromChecklist(checklistName, itemId) {
 		return new Promise(function (resolve, reject) {
 			let collection = MongoDb.getDb().collection('test');

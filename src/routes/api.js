@@ -70,6 +70,16 @@ router.post('/:username/checklists/:checklistName/items', (request, response) =>
 		.catch(error => response.sendStatus(BAD_REQUEST));
 });
 
+router.put('/:username/checklists/:checklistName/items', (request, response) => {
+	let checklistName = request.params.checklistName;
+	let items = request.body;
+
+	itemService
+		.updateItems(checklistName, items)
+		.then(() => response.sendStatus(OK))
+		.catch(error => response.sendStatus(BAD_REQUEST));
+});
+
 router.delete('/:username/checklists/:checklistName/items/:itemId', (request, response) => {
 	let checklistName = request.params.checklistName;
 	let itemId = request.params.itemId;

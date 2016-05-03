@@ -15,8 +15,8 @@ class ItemsController {
 			return;
 		}
 
+		let vm = this;
 		if (!this.checklist) {
-			let vm = this;
 			this.ItemsService
 				.getChecklist(this.rootScope.user, this.checklistName)
 				.then(result => {
@@ -29,17 +29,8 @@ class ItemsController {
 			animation: 150,
 			delay: 0,
 			handle: ".handle",
-			onStart: function(a,b) {
-				//console.clear();
-				//var items = $filter('filter')(a.models, { text: $scope.query });
-				//console.log('Your selected item: ' + items[a.oldIndex].text);
-			},
-			onSort: function(a,b){
-				//var items = $filter('filter')(a.models, { text: $scope.query });
-				//console.log('Your selected item: ' + items[a.oldIndex].text);
-			},
-			onEnd: function() {
-				//console.log('default onEnd()');
+			onUpdate: function () {
+				vm.ItemsService.updateItems(vm.rootScope.user, vm.checklistName, vm.checklist.items);
 			}
 		};
 	}
@@ -55,7 +46,7 @@ class ItemsController {
 	}
 
 	getPercentage() {
-		if (!this.checklist){
+		if (!this.checklist) {
 			return '0%';
 		}
 
@@ -93,7 +84,7 @@ class ItemsController {
 
 		let vm = this;
 		this.ItemsService.addItem(this.rootScope.user, this.checklistName, this.newItem)
-			.then(function(result) {
+			.then(function (result) {
 				let createdItem = result.data;
 
 				vm.newItem = {};

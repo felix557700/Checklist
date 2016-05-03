@@ -20,6 +20,12 @@ class ItemsService {
 		return this.http.delete(`./api/${name}/checklists/${checklistName}/items/${itemId}`);
 	}
 
+	updateItems(user, checklistName, items) {
+		let {name} = user;
+
+		return this.http.put(`./api/${name}/checklists/${checklistName}/items`, items);
+	}
+
 	toggleItem(user, checklistName, item) {
 		let {name} = user;
 		let {itemId, checked} = item;
