@@ -70,6 +70,8 @@ h4
 		margin: 10px 0
 
 .checklist
+	padding-top: 60px
+
 	// placeholder for draggable element
 	.sortable-ghost
 		.panel-body
@@ -87,3 +89,19 @@ h4
 	.sortable-fallback .fa-trash,
 	.sortable-fallback .fa-pencil
 		opacity: 0
+
+.checklist-header
+	position: fixed
+	width: 100vw
+	height: 50px
+	border-bottom: 1px solid #ddd
+	background-color: #eee
+	display: flex
+	justify-content: flex-start
+	align-items: center
+	z-index: 1
+
+.checklist-header
+	input
+		color: #666
+		margin-top: 17px

@@ -29,14 +29,18 @@ $primary-blue: #2196f3
 .handle
 	cursor: move
 
-.fa:active
-	color: $primary-blue
-
 .fa
-	width: 35px
 	text-align: center
+	&.fa-ellipsis-v,
+	&.fa-trash
+		width: 35px
+
+		&:active
+			color: $primary-blue
 
 .items
+	padding-top: 56px
+
 	// placeholder for draggable element
 	.sortable-ghost
 		color: $white
@@ -70,3 +74,12 @@ $primary-blue: #2196f3
 .blur
 	filter: 		blur(2px)
 	-webkit-filter: blur(2px)
+
+.progress-text
+	text-align: center
+	font-size: 1.5em
+
+.progress-line
+	position: fixed
+	width: 100vw
+	top: 50px

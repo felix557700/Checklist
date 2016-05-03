@@ -1,4 +1,19 @@
-<div class="progress no-margin">
+<header class="checklist-header">
+	<div class="col-xs-2">
+		<i class="fa fa-bars fa-2x center-block" ng-hide="showSearch"></i>
+		<i class="fa fa-angle-left fa-3x center-block" ng-show="showSearch" ng-click="showSearch = !showSearch"></i>
+	</div>
+
+	<form class="checklist-form col-xs-8">
+		<div class="progress-text" ng-if="!showSearch">{{vm.getPercentage()}}</div>
+		<input type="text" class="form-control alert pull-left" id="search" placeholder="Search" ng-show="showSearch">
+	</form>
+
+	<div class="col-xs-2">
+		<i class="fa fa-search fa-2x center-block" ng-click="showSearch = !showSearch; vm.focusOn('search')"></i>
+	</div>
+</header>
+<div class="progress progress-line no-margin">
 	<div class="progress-bar" ng-style="{width: vm.getPercentage()}"></div>
 </div>
 
@@ -11,7 +26,7 @@
 			</label>
 		</div>
 		<!-- TODO: fix bug by binding showDelete to the item -->
-		<i class="pull-right fa fa-bars fa-2x handle" ng-click="showDelete = !showDelete"></i>
+		<i class="pull-right fa fa-ellipsis-v fa-2x handle" ng-click="showDelete = !showDelete"></i>
 		<i class="pull-right fa fa-trash fa-2x" ng-if="showDelete" ng-click="vm.openModal($index)"></i>
 	</li>
 </ul>
