@@ -5,16 +5,20 @@
   "description": "mainly travel checklist",
   "keywords": "nodejs expressjs aurelia.js babel gulp checklist",
   "main": "./app/server.js",
+  "engines": {
+    "node": ">=5.0.0"
+  },
   "scripts": {
-    "node": "node ./app/server.js",
+    "start": "node ./app/server.js",
     "babel": "babel src -d app",
     "babel-watch": "babel src -d app --watch",
     "bundle": "webpack --colors --display-modules --display-error-details --config webpack.config.js",
     "bundle-watch": "webpack --watch --colors --display-modules --display-error-details --config webpack.config.js",
     "bundle-production": "webpack -p --config webpack.prod.config.js",
-    "start": "npm run bundle & npm run node",
     "build-heroku": "./node_modules/.bin/gulp dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run babel && ./node_modules/.bin/gulp build:frontend",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "angular": "^1.5.2",
