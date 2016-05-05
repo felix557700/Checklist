@@ -10,8 +10,8 @@
   },
   "scripts": {
     "start": "node ./app/server.js",
-    "babel": "babel src -d app",
-    "babel-watch": "babel src -d app --watch",
+    "babel": "babel backend -d app",
+    "babel-watch": "babel backend -d app --watch",
     "bundle": "webpack --colors --display-modules --display-error-details --config webpack.config.js",
     "bundle-watch": "webpack --watch --colors --display-modules --display-error-details --config webpack.config.js",
     "bundle-production": "webpack -p --config webpack.prod.config.js",
