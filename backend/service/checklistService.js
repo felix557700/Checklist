@@ -1,4 +1,4 @@
-import MongoDb from './../db'
+import MongoDb from '../db'
 import { v4 as uuid} from 'node-uuid'
 
 let writeSafe = {w: 1, j: true};

@@ -4,7 +4,7 @@ import {OK, NO_CONTENT, BAD_REQUEST, FORBIDDEN, CONFLICT} from './es6-http-statu
 import bcrypt from 'bcrypt-nodejs'
 import jwt from 'jsonwebtoken'
 import { v4 as uuid} from 'node-uuid'
-import UserService from './../service/UserService'
+import UserService from '../service/userService'
 
 let user = new Router();
 let userService = new UserService();

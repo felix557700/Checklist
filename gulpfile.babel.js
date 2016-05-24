@@ -15,7 +15,7 @@ import autoprefixer from 'gulp-autoprefixer';
 var environment = process.env.NODE_ENV || 'development';
 
 const paths = {
-	js: ['./src/**/*.js'],
+	js: ['./backend/**/*.js'],
 	destination: './app'
 };
 
@@ -42,7 +42,7 @@ gulp.task('dev', ['babel'], () => {
 	nodemon({
 		verbose: true,
 		ignore: ['.git', '.idea', 'node_modules/**/node_modules', 'test', './app'],
-		watch: ['./src', './frontend'],
+		watch: ['./backend', './frontend'],
 		script: './app/server.js',
 		nodeArgs: ['--debug'],
 		ext: 'js json',

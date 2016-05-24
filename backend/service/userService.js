@@ -1,4 +1,4 @@
-import MongoDb from './../db'
+import MongoDb from '../db'
 
 let writeSafe = {w: 1, j: true};
 
