@@ -24,14 +24,20 @@ $gray: #666
 	height: 400px
 	padding: 30px 5% 80px 5%
 	margin: 0 auto
-	max-width: $tablets
+	max-width: $phone-medium
 	background-color: $white
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 1px 7px rgba(0, 0, 0, 0.24)
 	@media only screen and (max-width: $phone-medium)
-		width: 100%
+		width: 100vw
+		height: 100vh
 		padding-left: 10%
 		padding-right: 10%
 		margin: 0
+		transform: translateY(0)
+	@media only screen and (min-width: $tablets)
+		transform: translateY(10%)
+		font-size: medium
+
 
 	&.error
 		animation: shake 0.4s
@@ -48,10 +54,11 @@ $gray: #666
 	overflow: hidden
 	transform: translateY(-200%)
 	transition: transform 0.75s ease-in-out
-
 	&.open
-		transform: translateY(23px)
+		transform: translateY(0%)
 		transition: transform 0.5s ease-in-out
+		@media only screen and (min-width: $tablets)
+			transform: translateY(10%)
 
 .register-close
 	position: absolute
