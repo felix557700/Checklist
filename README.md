@@ -1,4 +1,4 @@
-# Checklist
+# Checklist (WIP)
 
 [![Heroku](https://img.shields.io/badge/heroku-deployed-green.svg)](https://just-check-me.herokuapp.com/)
 
@@ -24,3 +24,15 @@ It can be also used for other cases:
 
 &emsp;&emsp;&emsp;&emsp; iPhone 4 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Google Nexus 6 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; iPhone 6 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Samsung Galaxy S4
 
+<br />
+<br />
+<hr />
+
+Still not implemented:
+- [ ] Remember me for token exparation time
+- [ ] Off screen hamburger menu
+- [ ] Logout link / button in menu
+- [ ] Search throught checklists / items
+- [ ] Limit amount of checklists / items
+- [ ] Better notifications
+- [ ] Change password feature
