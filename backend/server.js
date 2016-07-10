@@ -18,9 +18,16 @@ app.use(bodyParser.json());
 app.use(logger('dev'));
 app.disable("x-powered-by");
 
-app.use(expressJwt({secret: secret}).unless({path: ['/api/users/login', '/api/users/register', '*.html', '*.js', '*.css', '*.ico']}));
+app.use(expressJwt({secret: secret}).unless(
+	{
+		path: [
+			'/api/users/login', '/api/users/register', /.*\.html/, /.*\.js/, /.*\.css/, /.*\.ico/,
+			{url: '/', methods: ['GET', 'PUT']}
+		]
+	}
+));
 
-app.use(function (error, request, response, next) {
+app.use(function (error, request, response) {
 	if (error.name === 'UnauthorizedError') {
 		response.status(401).json({message: 'unauthorized'});
 	} else if (error) {
@@ -30,6 +37,9 @@ app.use(function (error, request, response, next) {
 
 app.use('/api', router);
 app.use('/api/users', user);
+app.use('/*', function (request, response) {
+	response.redirect('/')
+});
 
 new MongoDb().connectToMongo()
 	.then(() => startServer(app))
