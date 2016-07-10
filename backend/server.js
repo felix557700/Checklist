@@ -27,12 +27,19 @@ app.use(expressJwt({secret: secret}).unless(
 	}
 ));
 
-app.use(function (error, request, response) {
+app.use(function (error, request, response, next) {
 	if (error.name === 'UnauthorizedError') {
 		response.status(401).json({message: 'unauthorized'});
 	} else if (error) {
 		response.status(400).json({message: 'bad request'});
 	}
+});
+
+app.use(function (request, response, next) {
+	response.setHeader('x-frame-options', 'SAMEORIGIN');
+	response.setHeader('X-XSS-Protection', '1; mode=block');
+	response.setHeader('X-Content-Type-Options', 'nosniff');
+	next();
 });
 
 app.use('/api', router);
